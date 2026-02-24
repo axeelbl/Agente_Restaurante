@@ -1,0 +1,16 @@
+/* =========================
+BASE / RESET
+========================= */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    background-color: #f2f4f8;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    color: #1f2937;
+}

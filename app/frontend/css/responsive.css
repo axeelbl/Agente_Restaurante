@@ -1,0 +1,39 @@
+/* =========================
+RESPONSIVE / MÓVIL
+========================= */
+@media (max-width: 768px) {
+    #avatar { width: 200px; height: 200px; }
+    #avatarName { font-size: 18px; }
+    #avatarStatus { font-size: 13px; }
+    #profileLinks { gap: 12px; }
+    #profileLinks a { width: 90px; font-size: 12px; padding: 6px 0; }
+    .chat-container { padding: 16px; gap: 8px; }
+    .message { max-width: 90%; font-size: 14px; padding: 12px 14px; }
+    .input-container { flex-direction: column; gap: 8px; padding: 12px; }
+    #userInput { width: 100%; font-size: 14px; padding: 12px 14px; }
+    #sendBtn, #clearBtn { width: 100%; font-size: 14px; padding: 12px 0; }
+    #avatarContainer { padding: 18px 14px 14px; }
+    #avatar { width: 180px; height: 180px; margin-bottom: 10px; }
+    #avatarName { font-size: 17px; margin-top: 4px; }
+    #avatarStatus { font-size: 12px; margin-top: 4px; }
+    #profileLinks { margin-top: 12px; gap: 10px; }
+    #profileLinks a {min-width: 110px;width: auto;white-space: nowrap;font-size: 12px;padding: 6px 12px;}
+    #profileLinks svg { width: 16px; height: 16px; }
+    .input-container { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; padding: 10px; }
+    #sendBtn { grid-column: 1; grid-row: 1; font-size: 13px; padding: 8px 0; border-radius: 10px; }
+    #clearBtn { grid-column: 2; grid-row: 1; font-size: 13px; padding: 8px 0; border-radius: 10px; }
+    #userInput { grid-column: 1 / -1; grid-row: 2; font-size: 14px; padding: 12px 14px; }
+}
+
+@media (max-width: 480px) {
+    #avatar { width: 160px; height: 160px; }
+    #avatarName { font-size: 16px; }
+    #avatarStatus { font-size: 12px; }
+    .message { font-size: 13px; padding: 10px 12px; }
+    #avatar { width: 150px; height: 150px; }
+    #avatarName { font-size: 15px; }
+    #avatarStatus { font-size: 11px; }
+    #profileLinks a { width: 80px; font-size: 11px; }
+    #sendBtn, #clearBtn { font-size: 12px; padding: 7px 0; }
+    #userInput { font-size: 13px; }
+}

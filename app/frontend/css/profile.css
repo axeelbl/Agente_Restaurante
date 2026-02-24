@@ -1,0 +1,39 @@
+/* =========================
+LINKS PERFIL (SVG ICONS)
+========================= */
+#profileLinks {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+#profileLinks a {
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+    gap: 8px;
+    width: 110px;              
+    padding: 8px 0;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    text-decoration: none;
+    color: #e5e7eb;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+#profileLinks svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+#profileLinks a:hover {
+    background: rgba(56,189,248,0.15);
+    border-color: #38bdf8;
+    color: #ffffff;
+    transform: translateY(-1px);
+}

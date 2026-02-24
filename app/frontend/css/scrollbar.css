@@ -1,0 +1,11 @@
+/* =========================
+SCROLLBAR
+========================= */
+.chat-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
