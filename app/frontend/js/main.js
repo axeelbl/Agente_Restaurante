@@ -2,6 +2,32 @@ import { AvatarController } from "./avatar.js";
 import { ChatUI } from "./ui.js";
 import { ChatController } from "./chat.js";
 
+function bindQuickActions(chat, ui) {
+    document.querySelectorAll("[data-prompt]").forEach(button => {
+        button.addEventListener("click", () => {
+            const prompt = button.dataset.prompt;
+            if (!prompt) return;
+
+            document.getElementById("chatExperience")?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+
+            chat.queueMessage(prompt);
+            ui.userInput.focus();
+        });
+    });
+
+    document.querySelectorAll("[data-click-target]").forEach(button => {
+        button.addEventListener("click", () => {
+            const targetId = button.dataset.clickTarget;
+            if (!targetId) return;
+
+            document.getElementById(targetId)?.click();
+        });
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const avatar = new AvatarController(
         document.getElementById("baseFace"),
@@ -19,22 +45,21 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     const chat = new ChatController(ui, avatar, "/chat");
- 
-    // HACERLO GLOBAL - I know this is not the most good way to do it, but I'm hurry now
-    window.chatUI = ui;
 
-    // Mensaje de bienvenida
+    window.chatUI = ui;
+    window.chatController = chat;
+
+    bindQuickActions(chat, ui);
+
     setTimeout(() => {
         ui.addBotMessageTyping(
-            "¡Hola! 👋 Soy el PeluqueroBot, tu peluquero profesional.\n\n" +
-            "Puedo ayudarte con cortes, precios, reservar cita, modificar o anular citas y enseñarte fotos de los cortes 📸✂️\n\n" +
-            "👉 Para una cita, dime que quieres reservar y estos datos juntos:\n" +
-            "• Tu nombre\n" +
-            "• Servicio (Corte, Barba o Corte + Barba)\n" +
-            "• Día (dd/mm/aaaa)\n" +
-            "• Hora (24h)\n" +
-            "• Teléfono o email\n\n" +
-            "👉 Para ver fotos, solo escribe: ver fotos"
+            "Hola. Soy Mesa Viva Bot.\n\n" +
+            "Puedo ayudarte con la carta, el menu del dia, recomendaciones, fotos del local y reservas.\n\n" +
+            "Prueba con mensajes como:\n" +
+            "- Ensename la carta\n" +
+            "- Que me recomiendas si quiero algo vegetariano\n" +
+            "- Quiero ver fotos de la terraza\n" +
+            "- Quiero reservar para 4 manana a las 21:00"
         );
     }, 300);
 });

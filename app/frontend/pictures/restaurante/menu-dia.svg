@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <rect width="800" height="520" fill="#ede1c7"/>
+  <rect x="190" y="50" width="420" height="420" rx="26" fill="#fffdf8" stroke="#d1c29d" stroke-width="10"/>
+  <rect x="280" y="95" width="240" height="48" rx="12" fill="#d6b170"/>
+  <line x1="255" y1="200" x2="545" y2="200" stroke="#d1c29d" stroke-width="6"/>
+  <line x1="255" y1="260" x2="545" y2="260" stroke="#d1c29d" stroke-width="6"/>
+  <line x1="255" y1="320" x2="545" y2="320" stroke="#d1c29d" stroke-width="6"/>
+  <line x1="255" y1="380" x2="545" y2="380" stroke="#d1c29d" stroke-width="6"/>
+  <text x="400" y="127" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#5c4a30">Menu del dia</text>
+  <text x="400" y="455" font-family="Arial, sans-serif" font-size="40" text-anchor="middle" fill="#5c4a30">Menu del dia</text>
+</svg>

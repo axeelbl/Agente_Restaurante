@@ -1,39 +1,195 @@
-/* =========================
-RESPONSIVE / MÓVIL
-========================= */
+@media (max-width: 1180px) {
+    .hero-section {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-copy {
+        order: 2;
+    }
+
+    .chat-shell {
+        order: 1;
+    }
+}
+
+@media (max-width: 900px) {
+    .page-shell {
+        padding-inline: 14px;
+    }
+
+    .topbar {
+        top: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .brand,
+    .topbar-actions {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .topbar-nav {
+        width: 100%;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .hero-copy,
+    .modal-card {
+        padding: 24px;
+    }
+
+    .chat-shell {
+        min-height: 700px;
+    }
+
+    .chat-container {
+        max-height: 540px;
+    }
+}
+
 @media (max-width: 768px) {
-    #avatar { width: 200px; height: 200px; }
-    #avatarName { font-size: 18px; }
-    #avatarStatus { font-size: 13px; }
-    #profileLinks { gap: 12px; }
-    #profileLinks a { width: 90px; font-size: 12px; padding: 6px 0; }
-    .chat-container { padding: 16px; gap: 8px; }
-    .message { max-width: 90%; font-size: 14px; padding: 12px 14px; }
-    .input-container { flex-direction: column; gap: 8px; padding: 12px; }
-    #userInput { width: 100%; font-size: 14px; padding: 12px 14px; }
-    #sendBtn, #clearBtn { width: 100%; font-size: 14px; padding: 12px 0; }
-    #avatarContainer { padding: 18px 14px 14px; }
-    #avatar { width: 180px; height: 180px; margin-bottom: 10px; }
-    #avatarName { font-size: 17px; margin-top: 4px; }
-    #avatarStatus { font-size: 12px; margin-top: 4px; }
-    #profileLinks { margin-top: 12px; gap: 10px; }
-    #profileLinks a {min-width: 110px;width: auto;white-space: nowrap;font-size: 12px;padding: 6px 12px;}
-    #profileLinks svg { width: 16px; height: 16px; }
-    .input-container { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; padding: 10px; }
-    #sendBtn { grid-column: 1; grid-row: 1; font-size: 13px; padding: 8px 0; border-radius: 10px; }
-    #clearBtn { grid-column: 2; grid-row: 1; font-size: 13px; padding: 8px 0; border-radius: 10px; }
-    #userInput { grid-column: 1 / -1; grid-row: 2; font-size: 14px; padding: 12px 14px; }
+    .page-shell {
+        padding: 12px 12px 24px;
+    }
+
+    .page-content {
+        margin-top: 16px;
+    }
+
+    .topbar {
+        padding: 14px;
+        border-radius: 22px;
+    }
+
+    .topbar-nav {
+        display: none;
+    }
+
+    .hero-copy,
+    .modal-card {
+        padding: 20px;
+        border-radius: 24px;
+    }
+
+    .hero-title,
+    .assistant-title {
+        max-width: none;
+    }
+
+    .assistant-intro {
+        flex-direction: column;
+    }
+
+    #avatar {
+        width: 108px;
+        height: 108px;
+    }
+
+    #profileLinks {
+        width: 100%;
+    }
+
+    #profileLinks a {
+        flex: 1 1 120px;
+    }
+
+    .chat-toolbar {
+        padding: 18px 18px 0;
+    }
+
+    .chat-container {
+        min-height: 360px;
+        max-height: 500px;
+        padding: 18px;
+    }
+
+    .message,
+    .photo-gallery {
+        width: 100%;
+    }
+
+    .message-detail-grid,
+    .field-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .input-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 18px;
+    }
+
+    #userInput {
+        grid-column: 1 / -1;
+    }
+
+    #sendBtn,
+    #clearBtn {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .hero-actions,
+    .summary-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
 }
 
 @media (max-width: 480px) {
-    #avatar { width: 160px; height: 160px; }
-    #avatarName { font-size: 16px; }
-    #avatarStatus { font-size: 12px; }
-    .message { font-size: 13px; padding: 10px 12px; }
-    #avatar { width: 150px; height: 150px; }
-    #avatarName { font-size: 15px; }
-    #avatarStatus { font-size: 11px; }
-    #profileLinks a { width: 80px; font-size: 11px; }
-    #sendBtn, #clearBtn { font-size: 12px; padding: 7px 0; }
-    #userInput { font-size: 13px; }
+    .brand-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+    }
+
+    .hero-copy,
+    .modal-card {
+        padding: 18px;
+    }
+
+    .hero-title {
+        font-size: clamp(1.8rem, 8vw, 2.4rem);
+    }
+
+    .assistant-title {
+        font-size: 1.8rem;
+    }
+
+    .prompt-group {
+        gap: 8px;
+    }
+
+    .prompt-chip {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .chat-container {
+        padding: 16px;
+    }
+
+    .message {
+        padding: 16px;
+        border-radius: 22px;
+    }
+
+    .photo-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 14px;
+    }
+
+    .img-viewer span {
+        top: 16px;
+        right: 16px;
+    }
+
+    .left {
+        left: 12px;
+    }
+
+    .right {
+        right: 12px;
+    }
 }

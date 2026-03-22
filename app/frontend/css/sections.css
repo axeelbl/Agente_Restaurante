@@ -1,0 +1,191 @@
+.hero-section {
+    display: grid;
+    grid-template-columns: minmax(0, 1.38fr) minmax(300px, 0.62fr);
+    gap: 22px;
+    align-items: start;
+}
+
+.hero-copy {
+    position: relative;
+    overflow: hidden;
+    padding: 28px;
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(231, 217, 201, 0.96);
+    background: linear-gradient(180deg, rgba(255, 250, 244, 0.94), rgba(255, 255, 255, 0.9));
+    box-shadow: var(--shadow-strong);
+}
+
+.hero-copy::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at top right, rgba(243, 216, 200, 0.36), transparent 28%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 100%);
+}
+
+.hero-copy > * {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-copy-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.eyebrow,
+.section-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(181, 95, 58, 0.16);
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--accent-dark);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.hero-title,
+.assistant-title,
+.modal-header h2 {
+    margin: 14px 0 0;
+    font-family: Georgia, "Palatino Linotype", "Book Antiqua", serif;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: #221914;
+}
+
+.hero-title {
+    font-size: clamp(2.1rem, 3.3vw, 3.4rem);
+    line-height: 1.08;
+    max-width: 14ch;
+}
+
+.hero-text,
+.summary-text {
+    margin: 14px 0 0;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.65;
+}
+
+.hero-actions,
+.summary-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.quick-action,
+.section-action,
+.inline-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(231, 217, 201, 0.98);
+    background: rgba(255, 255, 255, 0.82);
+    color: var(--text);
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 10px 24px rgba(78, 52, 31, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.quick-action:hover,
+.section-action:hover,
+.inline-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 28px rgba(78, 52, 31, 0.09);
+    border-color: rgba(181, 95, 58, 0.24);
+}
+
+.quick-action-primary,
+.section-action {
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    color: #fff8f3;
+    border-color: transparent;
+}
+
+.section-action-secondary {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--text);
+    border-color: rgba(231, 217, 201, 0.98);
+}
+
+.summary-stack {
+    display: grid;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.summary-card,
+.message-section-card,
+.message-item-card {
+    border: 1px solid rgba(231, 217, 201, 0.96);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: var(--shadow-soft);
+}
+
+.summary-card {
+    padding: 18px;
+    border-radius: var(--radius-lg);
+}
+
+.summary-card h3 {
+    margin: 12px 0 0;
+    font-size: 20px;
+}
+
+.summary-list {
+    display: grid;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.summary-line {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(231, 217, 201, 0.84);
+}
+
+.summary-line:first-child {
+    padding-top: 0;
+    border-top: 0;
+}
+
+.summary-meta {
+    color: var(--accent-dark);
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.summary-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.summary-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: rgba(243, 216, 200, 0.54);
+    color: var(--secondary);
+    font-size: 12px;
+    font-weight: 700;
+}

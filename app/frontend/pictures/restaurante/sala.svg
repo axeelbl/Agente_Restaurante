@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <rect width="800" height="520" fill="#d6c2a8"/>
+  <rect x="0" y="0" width="800" height="130" fill="#f0e7da"/>
+  <rect x="130" y="90" width="130" height="170" fill="#c7b294"/>
+  <rect x="540" y="90" width="130" height="170" fill="#c7b294"/>
+  <rect x="285" y="175" width="230" height="130" rx="18" fill="#7d5035"/>
+  <circle cx="230" cy="355" r="58" fill="#7d5035"/>
+  <circle cx="570" cy="355" r="58" fill="#7d5035"/>
+  <circle cx="230" cy="355" r="36" fill="#f7f1e7"/>
+  <circle cx="570" cy="355" r="36" fill="#f7f1e7"/>
+  <rect x="355" y="105" width="90" height="45" rx="10" fill="#f4d48a"/>
+  <text x="400" y="458" font-family="Arial, sans-serif" font-size="40" text-anchor="middle" fill="#5e442e">Comedor interior</text>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <rect width="800" height="520" fill="#f0d8d6"/>
+  <rect x="80" y="85" width="260" height="300" rx="28" fill="#fff9f6"/>
+  <rect x="460" y="110" width="200" height="250" rx="28" fill="#fff7f2"/>
+  <rect x="120" y="220" width="180" height="95" rx="18" fill="#d6a182"/>
+  <rect x="500" y="230" width="120" height="85" rx="18" fill="#6a3d34"/>
+  <rect x="125" y="200" width="170" height="28" rx="12" fill="#f8f0ea"/>
+  <circle cx="560" cy="215" r="28" fill="#f6ecd9"/>
+  <circle cx="575" cy="205" r="8" fill="#c7443d"/>
+  <circle cx="600" cy="160" r="12" fill="#c7443d"/>
+  <text x="400" y="452" font-family="Arial, sans-serif" font-size="40" text-anchor="middle" fill="#6e3d36">Postres</text>
+</svg>

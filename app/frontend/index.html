@@ -3,132 +3,292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PeluqueriaBot</title>
+    <title>Mesa Viva | Asistente de restaurante</title>
     <link rel="icon" type="image/png" href="/static/pictures/favicon.png">
     <link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body>
-    <div id="avatarContainer" style="text-align:center; margin-bottom:10px;">
-        <div id="avatar">
-            <div id="avatarHalo"></div>
-            <img id="baseFace" src="/static/pictures/eyes_open_mouth_closed.png">
-            <img id="mouthOpenImg" src="/static/pictures/eyes_open_mouth_open.png">
-        </div>
-        <div id="avatarName">Peluquería Bot</div>
-        <div id="avatarStatus">🟢 Online</div>
-        <div id="profileLinks">
-            <a href="https://www.google.com/maps/search/?api=1&query=Carrer+Padilla+241,+Local+1,+08013,+Barcelona" target="_blank" aria-label="Ubicación">
-                <!-- Icono de ubicación -->
-                <svg viewBox="0 0 24 24" width="24" height="24">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
-                </svg>
-                <span>Ubicación</span>
+    <div class="page-shell">
+        <header class="topbar">
+            <a href="#inicio" class="brand" aria-label="Ir al inicio de Mesa Viva">
+                <span class="brand-mark">MV</span>
+                <span class="brand-copy">
+                    <strong>Mesa Viva</strong>
+                    <span>Asistente inteligente de restaurante</span>
+                </span>
             </a>
 
-            <a href="https://www.instagram.com/palacebarberbcn/" target="_blank" aria-label="Instagram">
-                <!-- Instagram -->
-                <svg viewBox="0 0 24 24">
-                    <path d="M12 2.2c3.2 0 3.584.012 4.85.07 1.17.055 1.966.24 2.425.403a4.92 4.92 0 0 1 1.76 1.02 4.92 4.92 0 0 1 1.02 1.76c.163.46.348 1.256.403 2.425.058 1.266.07 1.65.07 4.85s-.012 3.584-.07 4.85c-.055 1.17-.24 1.966-.403 2.425a4.92 4.92 0 0 1-1.02 1.76 4.92 4.92 0 0 1-1.76 1.02c-.46.163-1.256.348-2.425.403-1.266.058-1.65.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.055-1.966-.24-2.425-.403a4.92 4.92 0 0 1-1.76-1.02 4.92 4.92 0 0 1-1.02-1.76c-.163-.46-.348-1.256-.403-2.425C2.212 15.584 2.2 15.2 2.2 12s.012-3.584.07-4.85c.055-1.17.24-1.966.403-2.425a4.92 4.92 0 0 1 1.02-1.76 4.92 4.92 0 0 1 1.76-1.02c.46-.163 1.256-.348 2.425-.403C8.416 2.212 8.8 2.2 12 2.2zm0-2.2C8.735 0 8.332.014 7.052.072 5.768.13 4.7.325 3.85.615a7.093 7.093 0 0 0-2.558 1.67A7.093 7.093 0 0 0 .615 4.843c-.29.85-.485 1.918-.543 3.202C0 8.332 0 8.735 0 12s.014 3.668.072 4.948c.058 1.284.253 2.352.543 3.202a7.093 7.093 0 0 0 1.67 2.558 7.093 7.093 0 0 0 2.558 1.67c.85.29 1.918.485 3.202.543C8.332 24 8.735 24 12 24s3.668-.014 4.948-.072c1.284-.058 2.352-.253 3.202-.543a7.093 7.093 0 0 0 2.558-1.67 7.093 7.093 0 0 0 1.67-2.558c.29-.85.485-1.918.543-3.202C24 15.668 24 15.265 24 12s-.014-3.668-.072-4.948c-.058-1.284-.253-2.352-.543-3.202a7.093 7.093 0 0 0-1.67-2.558 7.093 7.093 0 0 0-2.558-1.67c-.85-.29-1.918-.485-3.202-.543C15.668 0 15.265 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.844a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0z"/>
-                </svg>
-                <span>Instagram</span>
-            </a>
+            <nav class="topbar-nav" aria-label="Secciones principales">
+                <a href="#chatExperience">Chat</a>
+                <a href="#menuSection">Carta</a>
+                <a href="#bookingSection">Reservas</a>
+                <a href="#infoSection">Informacion</a>
+            </nav>
 
-            <a href="#" id="reserveBtn" aria-label="Pedir cita">
-                <!-- Calendario -->
-                <svg viewBox="0 0 24 24">
-                    <path d="M7 2v2H5c-1.1 0-2 .9-2 
-                    2v14c0 1.1.9 2 2 2h14c1.1 
-                    0 2-.9 2-2V6c0-1.1-.9-2-2-2h-2V2h-2v2H9V2H7zm12 18H5V9h14v11z"/>
-                </svg>
-                <span>Pedir cita</span>
-            </a>
+            <div class="topbar-actions">
+                <a href="tel:+34910123456" class="topbar-link">Llamar</a>
+                <a href="#" id="reserveBtn" class="topbar-link topbar-link-primary" aria-label="Reservar mesa">
+                    Reservar
+                </a>
+            </div>
+        </header>
 
-            <a href="#" id="manageBtn" aria-label="Gestionar cita">
-                <!-- Icono de engranaje -->
-                <svg viewBox="0 0 24 24" width="24" height="24">
-                    <path d="M19.43 12.98c.04-.32.07-.65.07-.98s-.03-.66-.07-.98l2.11-1.65a.5.5 0 0 0 .12-.64l-2-3.46a.5.5 0 0 0-.6-.22l-2.49 1a7.03 7.03 0 0 0-1.7-.98l-.38-2.65A.5.5 0 0 0 14 2h-4a.5.5 0 0 0-.5.42l-.38 2.65c-.63.23-1.23.54-1.7.98l-2.49-1a.5.5 0 0 0-.6.22l-2 3.46a.5.5 0 0 0 .12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65a.5.5 0 0 0-.12.64l2 3.46c.14.24.42.33.66.22l2.49-1c.47.44 1.07.75 1.7.98l.38 2.65c.04.25.25.42.5.42h4c.25 0 .46-.17.5-.42l.38-2.65c.63-.23 1.23-.54 1.7-.98l2.49 1c.24.11.52.02.66-.22l2-3.46a.5.5 0 0 0-.12-.64l-2.11-1.65zM12 15.5A3.5 3.5 0 1 1 15.5 12 3.5 3.5 0 0 1 12 15.5z"/>
-                </svg>
-                <span>Gestion cita</span>
-            </a>
-        </div>
+        <main class="page-content" id="inicio">
+            <section class="hero-section">
+                <section class="chat-shell" id="chatExperience" aria-labelledby="chatTitle">
+                    <div id="avatarContainer">
+                        <div class="assistant-intro">
+                            <div id="avatar">
+                                <div id="avatarHalo"></div>
+                                <img id="baseFace" src="/static/pictures/eyes_open_mouth_closed.png" alt="Avatar de Mesa Viva Bot">
+                                <img id="mouthOpenImg" src="/static/pictures/eyes_open_mouth_open.png" alt="" aria-hidden="true">
+                            </div>
 
+                            <div class="assistant-copy">
+                                <span class="assistant-label">Disponible ahora</span>
+                                <h1 id="chatTitle" class="assistant-title">Habla con Mesa Viva Bot</h1>
+                                <div id="avatarName">Mesa Viva Bot</div>
+                                <div id="avatarStatus" data-state="online">Online</div>
+                                <p class="assistant-summary">
+                                    Carta, recomendaciones, fotos, reservas y dudas del restaurante en un solo chat.
+                                </p>
+                            </div>
+                        </div>
 
+                        <div id="profileLinks">
+                            <a href="https://www.google.com/maps/search/?api=1&amp;query=Calle+de+Alcala+145,+Madrid" target="_blank" rel="noreferrer" aria-label="Ubicacion">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 2a7 7 0 0 0-7 7c0 5.03 5.14 11.18 6.24 12.45a1 1 0 0 0 1.52 0C13.86 20.18 19 14.03 19 9a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"></path>
+                                </svg>
+                                <span>Ubicacion</span>
+                            </a>
+
+                            <a href="tel:+34910123456" aria-label="Telefono">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M6.62 10.79a15.46 15.46 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1-.24 11.36 11.36 0 0 0 3.57.57 1 1 0 0 1 1 1V21a1 1 0 0 1-1 1A17 17 0 0 1 2 5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.57 1 1 0 0 1-.25 1z"></path>
+                                </svg>
+                                <span>Telefono</span>
+                            </a>
+
+                            <a href="#" id="manageBtn" aria-label="Gestionar reserva">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M19.43 12.98c.04-.32.07-.65.07-.98s-.03-.66-.07-.98l2.11-1.65a.5.5 0 0 0 .12-.64l-2-3.46a.5.5 0 0 0-.6-.22l-2.49 1a7.03 7.03 0 0 0-1.7-.98l-.38-2.65A.5.5 0 0 0 14 2h-4a.5.5 0 0 0-.5.42l-.38 2.65c-.63.23-1.23.54-1.7.98l-2.49-1a.5.5 0 0 0-.6.22l-2 3.46a.5.5 0 0 0 .12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65a.5.5 0 0 0-.12.64l2 3.46c.14.24.42.33.66.22l2.49-1c.47.44 1.07.75 1.7.98l.38 2.65c.04.25.25.42.5.42h4c.25 0 .46-.17.5-.42l.38-2.65c.63-.23 1.23-.54 1.7-.98l2.49 1c.24.11.52.02.66-.22l2-3.46a.5.5 0 0 0-.12-.64l-2.11-1.65zM12 15.5A3.5 3.5 0 1 1 15.5 12 3.5 3.5 0 0 1 12 15.5z"></path>
+                                </svg>
+                                <span>Gestionar</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="chat-toolbar">
+                        <span class="toolbar-label">Accesos rapidos</span>
+                        <div class="prompt-group">
+                            <button type="button" class="prompt-chip" data-prompt="Ensename la carta">Carta</button>
+                            <button type="button" class="prompt-chip" data-prompt="Que me recomiendas si quiero algo ligero">Recomendacion</button>
+                            <button type="button" class="prompt-chip" data-prompt="Cual es el horario y donde estais">Horario y ubicacion</button>
+                        </div>
+                    </div>
+
+                    <div class="chat-container" id="chatContainer" aria-live="polite" aria-label="Conversacion con el asistente"></div>
+
+                    <div class="input-container">
+                        <label for="userInput" class="sr-only">Escribe tu mensaje</label>
+                        <input type="text" id="userInput" placeholder="Escribe tu mensaje...">
+                        <button type="button" id="sendBtn">Enviar</button>
+                        <button type="button" id="clearBtn">Limpiar</button>
+                    </div>
+                </section>
+
+                <aside class="hero-copy hero-copy-compact">
+                    <span class="eyebrow">Simple y rapido</span>
+                    <h2 class="hero-title">Todo lo importante del restaurante en una interfaz mas sencilla.</h2>
+                    <p class="hero-text">
+                        El chat es el centro. El resto queda resumido en tarjetas cortas para no cargar la pantalla,
+                        sobre todo en movil.
+                    </p>
+
+                    <div class="hero-actions">
+                        <button type="button" class="quick-action quick-action-primary" data-prompt="Ensename la carta">
+                            Ver carta
+                        </button>
+                        <button type="button" class="quick-action" data-click-target="reserveBtn">
+                            Reservar
+                        </button>
+                    </div>
+
+                    <div class="summary-stack">
+                        <article class="summary-card" id="menuSection">
+                            <span class="section-kicker">Carta</span>
+                            <h3>Carta clara</h3>
+                            <div class="summary-list">
+                                <div class="summary-line"><span>Entrantes y principales</span><strong class="summary-meta">Desde 8.50 EUR</strong></div>
+                                <div class="summary-line"><span>Postres y bebidas</span><strong class="summary-meta">Menu del dia 16.90 EUR</strong></div>
+                            </div>
+                            <button type="button" class="section-action" data-prompt="Ensename la carta">Abrir carta</button>
+                        </article>
+
+                        <article class="summary-card" id="recommendationSection">
+                            <span class="section-kicker">Recomendaciones</span>
+                            <h3>Elegir es mas facil</h3>
+                            <div class="summary-chip-row">
+                                <span class="summary-chip">Burrata</span>
+                                <span class="summary-chip">Arroz meloso</span>
+                                <span class="summary-chip">Secreto iberico</span>
+                            </div>
+                            <button type="button" class="section-action section-action-secondary" data-prompt="Que me recomiendas si quiero algo especial de la casa">
+                                Pedir sugerencia
+                            </button>
+                        </article>
+
+                        <article class="summary-card" id="bookingSection">
+                            <span class="section-kicker">Reservas</span>
+                            <h3>Reserva o gestiona en pocos pasos</h3>
+                            <p class="summary-text">Hasta 8 personas online. Para grupos grandes, es mejor llamar.</p>
+                            <div class="summary-actions">
+                                <button type="button" class="section-action" data-click-target="reserveBtn">Reservar mesa</button>
+                                <button type="button" class="section-action section-action-secondary" data-click-target="manageBtn">
+                                    Gestionar
+                                </button>
+                            </div>
+                        </article>
+
+                        <article class="summary-card" id="infoSection">
+                            <span class="section-kicker">Informacion</span>
+                            <h3>Datos utiles</h3>
+                            <div class="summary-list">
+                                <div class="summary-line"><span>Horario</span><strong class="summary-meta">Mar-Dom 13:00-16:00 / 20:00-23:30</strong></div>
+                                <div class="summary-line"><span>Direccion</span><strong class="summary-meta">Calle de Alcala 145, Madrid</strong></div>
+                                <div class="summary-line"><span>Contacto</span><strong class="summary-meta">+34 910 123 456</strong></div>
+                            </div>
+                        </article>
+                    </div>
+                </aside>
+            </section>
+        </main>
     </div>
-
-    <div class="chat-container" id="chatContainer"></div>
-    <div class="input-container">
-        
-        <input type="text" id="userInput" placeholder="Escribe tu mensaje...">
-        <button type="button" id="sendBtn">Enviar</button>
-        <button type="button" id="clearBtn">Limpiar</button>
-        
-    </div>
-
 
     <div id="bookingModal" class="modal hidden">
-        <div class="modal-content">
-            <h2>📅 Reservar cita</h2>
+        <div class="modal-card">
+            <div class="modal-header">
+                <div>
+                    <span class="section-kicker">Reserva online</span>
+                    <h2>Reservar mesa</h2>
+                    <p>Completa los datos y revisa la disponibilidad antes de confirmar.</p>
+                </div>
+                <button type="button" id="closeModal" class="modal-close" aria-label="Cerrar modal de reserva">x</button>
+            </div>
 
-            <form id="bookingForm">
-                <input type="text" name="name" placeholder="Nombre completo" required>
+            <form id="bookingForm" class="booking-form">
+                <label class="field">
+                    <span>Nombre completo</span>
+                    <input type="text" name="name" placeholder="Nombre completo" required>
+                </label>
 
-                <select name="service" required>
-                    <option value="">Servicio</option>
-                    <option value="Corte">✂️ Corte</option>
-                    <option value="Barba">🧔 Barba</option>
-                    <option value="Corte + Barba">✂️🧔 Corte + Barba</option>
-                </select>
+                <div class="field-grid">
+                    <label class="field">
+                        <span>Comensales</span>
+                        <input type="number" name="party_size" min="1" max="8" placeholder="Numero de comensales" required>
+                    </label>
 
-                <input type="date" name="date" required>
-                <select name="time" id="timeSelect" required>
-                    <option value="">Selecciona una hora</option>
-                </select>
+                    <label class="field">
+                        <span>Fecha</span>
+                        <input type="date" name="date" required>
+                    </label>
+                </div>
 
-                <input type="text" name="contact" placeholder="Teléfono o email" required>
+                <div class="field-grid">
+                    <label class="field">
+                        <span>Hora</span>
+                        <select name="time" id="timeSelect" required>
+                            <option value="">Selecciona una hora</option>
+                        </select>
+                    </label>
+
+                    <label class="field">
+                        <span>Contacto</span>
+                        <input type="text" name="contact" placeholder="Telefono o email" required>
+                    </label>
+                </div>
+
+                <label class="field">
+                    <span>Observaciones</span>
+                    <input type="text" name="notes" placeholder="Terraza, interior, trona, alergias...">
+                </label>
 
                 <div class="modal-actions">
-                    <button type="submit">Confirmar cita</button>
-                    <button type="button" id="closeModal">Cancelar</button>
+                    <button type="submit" class="modal-button modal-button-primary">Confirmar reserva</button>
+                    <button type="button" id="closeModalSecondary" class="modal-button modal-button-secondary">Cancelar</button>
                 </div>
             </form>
         </div>
     </div>
 
     <div id="manageBookingModal" class="modal hidden">
-        <div class="modal-content">
-            <h2>⚙️ Gestionar cita</h2>
+        <div class="modal-card">
+            <div class="modal-header">
+                <div>
+                    <span class="section-kicker">Gestion de reservas</span>
+                    <h2>Modificar o cancelar reserva</h2>
+                    <p>Usa el ID de reserva y el contacto para localizarla y actualizarla.</p>
+                </div>
+                <button type="button" id="closeManageModal" class="modal-close" aria-label="Cerrar modal de gestion">x</button>
+            </div>
 
-            <form id="manageBookingForm">
-                <input type="text" name="booking_uuid" placeholder="ID de reserva" required>
-                <input type="text" name="contact" placeholder="Teléfono o email" required>
-                
-                <label>Nueva fecha:</label>
-                <input type="date" name="new_date">
+            <form id="manageBookingForm" class="booking-form">
+                <div class="field-grid">
+                    <label class="field">
+                        <span>ID de reserva</span>
+                        <input type="text" name="booking_uuid" placeholder="ID de reserva" required>
+                    </label>
 
-                <label>Nueva hora:</label>
-                <select name="new_time" id="manageTimeSelect">
-                    <option value="">Selecciona una hora</option>
-                </select>
+                    <label class="field">
+                        <span>Contacto</span>
+                        <input type="text" name="contact" placeholder="Telefono o email" required>
+                    </label>
+                </div>
 
-                <div class="modal-actions">
-                    <button type="submit" id="modifyBtn">Modificar cita</button>
-                    <button type="button" id="cancelBtn">Cancelar cita</button>
-                    <button type="button" id="closeManageModal">Cerrar</button>
+                <div class="field-grid">
+                    <label class="field">
+                        <span>Nueva fecha</span>
+                        <input type="date" name="new_date">
+                    </label>
+
+                    <label class="field">
+                        <span>Nueva hora</span>
+                        <select name="new_time" id="manageTimeSelect">
+                            <option value="">Selecciona una hora</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="field-grid">
+                    <label class="field">
+                        <span>Nuevos comensales</span>
+                        <input type="number" name="new_party_size" min="1" max="8" placeholder="Mantener los actuales">
+                    </label>
+
+                    <label class="field">
+                        <span>Nuevas observaciones</span>
+                        <input type="text" name="new_notes" placeholder="Terraza, interior, trona, alergias...">
+                    </label>
+                </div>
+
+                <div class="modal-actions modal-actions-split">
+                    <button type="submit" id="modifyBtn" class="modal-button modal-button-primary">Modificar</button>
+                    <button type="button" id="cancelBtn" class="modal-button modal-button-danger">Cancelar reserva</button>
+                    <button type="button" id="closeManageModalSecondary" class="modal-button modal-button-secondary">Cerrar</button>
                 </div>
             </form>
         </div>
     </div>
 
     <div id="imageViewer" class="hidden img-viewer">
-        <span id="closeViewer">✖</span>
-        <button id="viewerLeft" class="nav left">❮</button>
-        <img id="viewerImg">
-        <button id="viewerRight" class="nav right">❯</button>
+        <span id="closeViewer" aria-label="Cerrar visor">x</span>
+        <button id="viewerLeft" class="nav left" aria-label="Imagen anterior">&lt;</button>
+        <img id="viewerImg" alt="Vista ampliada del restaurante">
+        <button id="viewerRight" class="nav right" aria-label="Imagen siguiente">&gt;</button>
     </div>
 
     <script type="module" src="/static/js/main.js"></script>
     <script src="/static/js/booking.js"></script>
 </body>
 </html>
-
-

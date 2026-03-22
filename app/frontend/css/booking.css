@@ -1,33 +1,130 @@
 .modal {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.6);
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 24px;
+    background: rgba(33, 22, 16, 0.58);
+    backdrop-filter: blur(12px);
     z-index: 1000;
 }
 
-.modal.hidden {
-    display: none;
+.modal-card {
+    width: min(100%, 760px);
+    padding: 28px;
+    border-radius: 30px;
+    border: 1px solid rgba(231, 217, 201, 0.96);
+    background: linear-gradient(180deg, rgba(255, 250, 244, 0.98), rgba(255, 255, 255, 0.96));
+    box-shadow: 0 34px 80px rgba(16, 10, 6, 0.24);
 }
 
-.modal-content {
-    background: #111;
-    padding: 20px;
-    border-radius: 12px;
-    width: 320px;
-    color: white;
+.modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 24px;
 }
 
-.modal-content input,
-.modal-content select {
+.modal-header h2 {
+    font-size: clamp(2rem, 3vw, 2.6rem);
+}
+
+.modal-header p {
+    margin: 12px 0 0;
+    max-width: 50ch;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.modal-close {
+    flex: 0 0 auto;
+    width: 46px;
+    height: 46px;
+    border: 1px solid rgba(231, 217, 201, 0.98);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--text);
+    font-size: 24px;
+    box-shadow: 0 10px 24px rgba(78, 52, 31, 0.05);
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.field-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.field span {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.booking-form input,
+.booking-form select {
     width: 100%;
-    margin-bottom: 10px;
-    padding: 8px;
+    min-height: 54px;
+    padding: 0 16px;
+    border-radius: 16px;
+    border: 1px solid rgba(231, 217, 201, 0.98);
+    background: rgba(255, 250, 244, 0.96);
+    color: var(--text);
+    outline: none;
 }
 
 .modal-actions {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.modal-actions-split .modal-button {
+    flex: 1 1 180px;
+}
+
+.modal-button {
+    min-height: 52px;
+    padding: 0 18px;
+    border-radius: 16px;
+    border: 1px solid transparent;
+    font-weight: 800;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal-button:hover,
+.modal-close:hover {
+    transform: translateY(-2px);
+}
+
+.modal-button-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    color: #fff8f3;
+    box-shadow: 0 14px 30px rgba(182, 95, 58, 0.2);
+}
+
+.modal-button-secondary {
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--text);
+    border-color: rgba(231, 217, 201, 0.98);
+}
+
+.modal-button-danger {
+    background: #fbe8e2;
+    color: #9d2f1b;
+    border-color: #f1c8bc;
 }

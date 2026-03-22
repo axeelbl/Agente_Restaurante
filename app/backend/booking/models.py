@@ -1,11 +1,14 @@
-from pydantic import BaseModel
 from datetime import date
 from typing import Optional
 
+from pydantic import BaseModel, Field
+
+
 class BookingRequest(BaseModel):
     name: str
-    service: str
     date: date
     time: str
+    party_size: int = Field(ge=1, le=8)
     contact: str
-    booking_uuid: Optional[str] = None  # UUID generado por el sistema, opcional al crear
+    notes: Optional[str] = ""
+    booking_uuid: Optional[str] = None

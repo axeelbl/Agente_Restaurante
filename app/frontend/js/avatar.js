@@ -9,6 +9,7 @@ export class AvatarController {
         this.mouthOpen = false;
         this.talkingInterval = null;
 
+        this.setStatus("online", "Online");
         this.startBlinking();
     }
 
@@ -24,23 +25,35 @@ export class AvatarController {
 
     startTalking() {
         if (this.talkingInterval) return;
+
         this.avatarHalo.style.opacity = "1";
-        this.avatar.style.transform = "scale(1.1)";
+        this.avatar.style.transform = "scale(1.05)";
+        this.setStatus("thinking", "Pensando...");
 
         this.talkingInterval = setInterval(() => {
             this.mouthOpen = !this.mouthOpen;
             this.mouthOpenImg.style.opacity = this.mouthOpen ? "1" : "0";
         }, 300);
-        this.avatarStatus.textContent = "🟡 Pensando...";
     }
 
-    stopTalking() {
+    stopTalking(state = "online") {
         clearInterval(this.talkingInterval);
         this.talkingInterval = null;
         this.mouthOpen = false;
         this.mouthOpenImg.style.opacity = "0";
         this.avatarHalo.style.opacity = "0";
         this.avatar.style.transform = "scale(1)";
-        this.avatarStatus.textContent = "🟢 Online";
+
+        if (state === "error") {
+            this.setStatus("error", "Sin conexion");
+            return;
+        }
+
+        this.setStatus("online", "Online");
+    }
+
+    setStatus(state, label) {
+        this.avatarStatus.dataset.state = state;
+        this.avatarStatus.textContent = label;
     }
 }

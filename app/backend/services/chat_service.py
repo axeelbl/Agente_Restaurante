@@ -1,12 +1,24 @@
-from app.backend.Bots.chat import ask_groq
 from app.backend.Bots.Prompts import SYSTEM_PROMPT
+from app.backend.Bots.chat import ask_groq
+
+
+def fallback_chat_response():
+    return (
+        "Puedo ayudarte con reservas, disponibilidad, carta, menu del día, fotos del local "
+        "y recomendaciones de platos. Por ejemplo: 'Quiero reservar para 4 manana a las 21:00', "
+        "'Ensename la carta' o 'Recomiendame algo vegetariano'."
+    )
+
 
 def handle_chat(user_message, request):
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": user_message}
+        {"role": "user", "content": user_message},
     ]
-    
-    bot_reply = ask_groq(messages)
+
+    try:
+        bot_reply = ask_groq(messages)
+    except Exception:
+        bot_reply = fallback_chat_response()
 
     return {"bot_message": bot_reply}

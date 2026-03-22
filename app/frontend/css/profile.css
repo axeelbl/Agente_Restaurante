@@ -1,39 +1,36 @@
-/* =========================
-LINKS PERFIL (SVG ICONS)
-========================= */
 #profileLinks {
-    margin-top: 16px;
     display: flex;
-    justify-content: center;
-    gap: 20px;
     flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
 }
 
 #profileLinks a {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;   
-    gap: 8px;
-    width: 110px;              
-    padding: 8px 0;
+    justify-content: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 0 16px;
     border-radius: 999px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 1px solid rgba(231, 217, 201, 0.98);
+    background: rgba(255, 255, 255, 0.82);
+    color: var(--text);
     text-decoration: none;
-    color: #e5e7eb;
     font-size: 14px;
-    transition: all 0.2s ease;
+    font-weight: 700;
+    box-shadow: 0 10px 24px rgba(78, 52, 31, 0.05);
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
 #profileLinks svg {
     width: 18px;
     height: 18px;
-    fill: currentColor;
+    fill: var(--accent);
 }
 
 #profileLinks a:hover {
-    background: rgba(56,189,248,0.15);
-    border-color: #38bdf8;
-    color: #ffffff;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    border-color: rgba(181, 95, 58, 0.24);
+    background: rgba(255, 255, 255, 0.96);
 }
