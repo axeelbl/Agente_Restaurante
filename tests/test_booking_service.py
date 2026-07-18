@@ -66,6 +66,24 @@ class BookingServiceTests(unittest.TestCase):
         self.assertEqual(stored_booking["party_size"], 4)
         self.assertEqual(stored_booking["notes"], "terraza")
 
+    def test_phone_with_spaces_is_accepted_and_normalized(self):
+        response = handle_booking(
+            {
+                "booking": {
+                    "name": "Ana Perez",
+                    "date": self.open_day.strftime("%d/%m/%Y"),
+                    "time": "21:30",
+                    "party_size": 2,
+                    "contact": "+34 666 66 66 66",
+                }
+            },
+            self.background_tasks,
+        )
+
+        self.assertIn("booking_uuid", response)
+        stored_booking = get_booking_by_uuid(response["booking_uuid"])
+        self.assertEqual(stored_booking["contact"], "+34666666666")
+
     def test_past_date_is_rejected(self):
         past_day = date.today() - timedelta(days=1)
         response = handle_booking(

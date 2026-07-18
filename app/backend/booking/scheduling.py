@@ -54,7 +54,7 @@ def parse_date(date_str: str) -> str:
     if date_str in ["hoy", "today"]:
         return datetime.today().strftime("%Y-%m-%d")
 
-    if date_str in ["manana", "mañana", "tomorrow"]:
+    if date_str in ["mañana", "mañana", "tomorrow"]:
         return (datetime.today() + timedelta(days=1)).strftime("%Y-%m-%d")
 
     try:
@@ -86,7 +86,7 @@ def parse_party_size(value) -> int:
 
     if party_size > MAX_PARTY_SIZE:
         raise ValueError(
-            f"Ahora mismo gestionamos reservas online de hasta {MAX_PARTY_SIZE} personas."
+            f"Ahora mismo gestiónamos reservas online de hasta {MAX_PARTY_SIZE} personas."
         )
 
     return party_size
@@ -180,7 +180,7 @@ def get_nearby_free_slots(
 def replace_common_expressions(text: str) -> str:
     text = text.lower()
     text = text.replace("y cuarto", ":15")
-    text = text.replace("y media", ":30")
+    text = text.replace("y medía", ":30")
     text = text.replace("y 1/2", ":30")
     text = text.replace("menos cuarto", ":45")
     text = text.replace(": ", ":")
@@ -212,8 +212,8 @@ def words_to_numbers(text: str) -> str:
 
 
 def normalize_period(text: str) -> str:
-    text = text.replace("del mediodia", "PM")
-    text = text.replace("de la manana", "AM")
+    text = text.replace("del mediodía", "PM")
+    text = text.replace("de la mañana", "AM")
     text = text.replace("de la mañana", "AM")
     text = text.replace("de la tarde", "PM")
     text = text.replace("de la noche", "PM")

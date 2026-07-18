@@ -41,7 +41,7 @@
     }
 
     .chat-shell {
-        min-height: 700px;
+        min-height: auto;
     }
 
     .chat-container {
@@ -70,7 +70,13 @@
     .hero-copy,
     .modal-card {
         padding: 20px;
-        border-radius: 24px;
+        border-radius: 20px;
+    }
+
+    .modal {
+        align-items: flex-start;
+        padding: 12px;
+        overflow-y: auto;
     }
 
     .hero-title,
@@ -147,6 +153,10 @@
     .hero-copy,
     .modal-card {
         padding: 18px;
+    }
+
+    .brand-copy span {
+        display: none;
     }
 
     .hero-title {

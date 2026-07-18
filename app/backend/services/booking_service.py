@@ -40,7 +40,7 @@ FIELD_LABELS = {
 def validate_optional_notes(notes: str | None) -> str:
     if not notes:
         return ""
-    return validate_text_field(notes, "Observaciones", max_length=120)
+    return validate_text_field(notes, "Observacíones", max_length=120)
 
 
 def add_notification_task(
@@ -92,7 +92,7 @@ def handle_booking(decision, background_tasks):
     try:
         booking_data["date"] = parse_date(booking_data["date"])
     except Exception:
-        return {"bot_message": "No he entendido la fecha. Escribela en formato dia/mes/año."}
+        return {"bot_message": "No he entendido la fecha. Escríbela en formato día/mes/año."}
 
     if is_closed_day(booking_data["date"]):
         return {
@@ -149,7 +149,7 @@ def handle_booking(decision, background_tasks):
     try:
         booking_uuid = save_booking(booking)
     except Exception:
-        return {"bot_message": "No he podido guardar la reserva. Intentalo de nuevo."}
+        return {"bot_message": "No he podido guardar la reserva. Inténtalo de nuevo."}
 
     add_notification_task(
         background_tasks,
@@ -162,7 +162,7 @@ def handle_booking(decision, background_tasks):
         notes=booking.notes,
     )
 
-    notes_line = f"\nObservaciones: {booking.notes}" if booking.notes else ""
+    notes_line = f"\nObservacíones: {booking.notes}" if booking.notes else ""
 
     return {
         "bot_message": (
@@ -172,7 +172,7 @@ def handle_booking(decision, background_tasks):
             f"Fecha: {booking.date}\n"
             f"Hora: {booking.time}"
             f"{notes_line}\n"
-            f"Confirmacion enviada a: {booking.contact}\n"
+            f"Confirmación enviada a: {booking.contact}\n"
             f"ID de reserva: {booking_uuid}\n\n"
             "Si quieres modificarla o cancelarla, puedes usar ese ID."
         ),
@@ -192,10 +192,10 @@ def handle_availability(decision: dict):
     try:
         date = parse_date(date_str)
     except Exception:
-        return {"bot_message": "No he entendido la fecha. Escribela en formato día/mes/año."}
+        return {"bot_message": "No he entendido la fecha. Escríbela en formato día/mes/año."}
 
     if is_closed_day(date):
-        return {"bot_message": "Ese dia estamos cerrados o la fecha ya ha pasado."}
+        return {"bot_message": "Ese día estamos cerrados o la fecha ya ha pasado."}
 
     try:
         party_size = parse_party_size(party_size_raw)
@@ -212,7 +212,7 @@ def handle_availability(decision: dict):
         if is_slot_available(date, normalized_time, party_size):
             return {
                 "bot_message": (
-                    f"Si, tengo disponibilidad el {date} a las {normalized_time} para "
+                    f"Sí, tengo disponibilidad el {date} a las {normalized_time} para "
                     f"{party_size} personas."
                 )
             }
@@ -265,11 +265,11 @@ def handle_availability_overview(days_ahead: int = 7, party_size: int = 2):
             result_lines.append(f"{date.strftime('%d/%m/%Y')} -> {preview}")
 
     if not result_lines:
-        return {"bot_message": "No veo disponibilidad en los proximos dias."}
+        return {"bot_message": "No veo disponibilidad en los próximos días."}
 
     return {
         "bot_message": (
-            f"Estos son los proximos dias con disponibilidad para {party_size} personas:\n\n"
+            f"Estos son los próximos días con disponibilidad para {party_size} personas:\n\n"
             + "\n".join(result_lines)
             + "\n\nSi quieres, te ayudo a cerrar la reserva."
         )
@@ -298,7 +298,7 @@ def handle_modify_booking(decision, background_tasks):
 
     if not any([new_date, new_time, new_party_size, new_notes]):
         return {
-            "bot_message": "Indica al menos una nueva fecha, una nueva hora, un nuevo numero de comensales o unas observaciones."
+            "bot_message": "Indica al menos una nueva fecha, una nueva hora, un nuevo número de comensales o unas observacíones."
         }
 
     booking = get_booking_by_uuid(booking_uuid)
@@ -310,7 +310,7 @@ def handle_modify_booking(decision, background_tasks):
     try:
         resolved_date = parse_date(new_date) if new_date else booking["date"]
     except ValueError:
-        return {"bot_message": "No he entendido la nueva fecha. Escribela como día/mes/año."}
+        return {"bot_message": "No he entendido la nueva fecha. Escríbela como día/mes/año."}
 
     if new_time:
         try:
@@ -354,7 +354,7 @@ def handle_modify_booking(decision, background_tasks):
             return {
                 "bot_message": "No trabajo esa hora exacta. Te propongo: " + " · ".join(options)
             }
-        return {"bot_message": "La nueva hora esta fuera del horario del restaurante."}
+        return {"bot_message": "La nueva hora está fuera del horario del restaurante."}
 
     if not is_slot_available(resolved_date, resolved_time, resolved_party_size, booking_uuid):
         target_minutes = parse_time_flexible(resolved_time)
@@ -398,7 +398,7 @@ def handle_modify_booking(decision, background_tasks):
         notes=resolved_notes,
     )
 
-    notes_line = f" Observaciones: {resolved_notes}." if resolved_notes else ""
+    notes_line = f" Observacíones: {resolved_notes}." if resolved_notes else ""
     return {
         "bot_message": (
             "Perfecto, tu reserva ha sido modificada: "

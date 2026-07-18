@@ -51,3 +51,11 @@ Thumbs.db
 
 # Logs
 *.log
+!*.env.example
+*.pem
+*.key
+id_rsa
+id_ed25519
+node_modules/
+*.pyc
+uvicorn_tmp.log

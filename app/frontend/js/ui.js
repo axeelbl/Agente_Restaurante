@@ -94,7 +94,7 @@ export class ChatUI {
     }
 
     clearChat() {
-        if (!confirm("Seguro que quieres borrar la conversacion?")) return;
+        if (!confirm("¿Seguro que quieres borrar la conversación?")) return;
         this.hideTypingIndicator();
         this.chatContainer.innerHTML = "";
         this.userInput.value = "";

@@ -54,12 +54,12 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
         ui.addBotMessageTyping(
             "Hola. Soy Mesa Viva Bot.\n\n" +
-            "Puedo ayudarte con la carta, el menu del dia, recomendaciones, fotos del local y reservas.\n\n" +
+            "Puedo ayudarte con la carta, el menú del día, recomendaciones, fotos del local y reservas.\n\n" +
             "Prueba con mensajes como:\n" +
-            "- Ensename la carta\n" +
-            "- Que me recomiendas si quiero algo vegetariano\n" +
+            "- Enséñame la carta\n" +
+            "- Qué me recomiendas si quiero algo vegetariano\n" +
             "- Quiero ver fotos de la terraza\n" +
-            "- Quiero reservar para 4 manana a las 21:00"
+            "- Quiero reservar para 4 mañana a las 21:00"
         );
     }, 300);
 });

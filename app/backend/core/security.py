@@ -68,9 +68,13 @@ def validate_contact(contact: str) -> str:
 
     contact = contact.strip()
     email_regex = r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
+    phone_candidate = re.sub(r"[\s().-]+", "", contact)
     phone_regex = r"^\+?\d{7,15}$"
     
     if re.match(email_regex, contact) or re.match(phone_regex, contact):
         return html.escape(contact)
+
+    if re.match(phone_regex, phone_candidate):
+        return html.escape(phone_candidate)
     
     raise ValueError("Contacto inválido (email o teléfono)")

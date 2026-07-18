@@ -1,20 +1,20 @@
 # Mesa Viva - Asistente inteligente de restaurante
 
-Mesa Viva es una aplicacion web para restaurantes que centraliza en un chat la informacion clave del local: carta, menu del dia, recomendaciones, fotos, dudas frecuentes y gestion de reservas.
+Mesa Viva es una aplicación web para restaurantes que centraliza en un chat la información clave del local: carta, menú del día, recomendaciones, fotos, dudas frecuentes y gestión de reservas.
 
-El proyecto combina un frontend ligero en HTML, CSS y JavaScript con una API en FastAPI. El asistente puede resolver consultas de forma local con reglas del dominio y, cuando esta configurado, apoyarse en Groq para conversaciones mas abiertas.
+El proyecto combina un frontend ligero en HTML, CSS y JavaScript con una API en FastAPI. El asistente puede resolver consultas de forma local con reglas del dominio y, cuando está configurado, apoyarse en Groq para conversaciones más abiertas.
 
 ## Funcionalidades principales
 
-- Chat conversacional para carta, recomendaciones, fotos e informacion del restaurante.
-- Reserva online con validacion de fecha, hora, contacto y numero de comensales.
-- Consulta de disponibilidad por dia, hora y tamano del grupo.
-- Modificacion y cancelacion de reservas mediante ID y contacto asociado.
-- Catalogo editable de platos, precios, alergenos, etiquetas y fotos.
-- Registro local de leads en CSV y envio opcional por SendGrid.
-- Protecciones basicas: rate limiting, cabeceras de seguridad, validacion de inputs y exclusion de secretos del repositorio.
+- Chat conversaciónal para carta, recomendaciones, fotos e información del restaurante.
+- Reserva online con validación de fecha, hora, contacto y número de comensales.
+- Consulta de disponibilidad por día, hora y tamaño del grupo.
+- Modificación y cancelación de reservas medíante ID y contacto asociado.
+- Catálogo editable de platos, precios, alérgenos, etiquetas y fotos.
+- Registro local de leads en CSV y envío opcional por SendGrid.
+- Protecciones básicas: rate limiting, cabeceras de seguridad, validación de inputs y exclusion de secretos del repositorio.
 
-## Stack tecnico
+## Stack técnico
 
 - Backend: FastAPI, Pydantic, SQLite, SlowAPI.
 - Frontend: HTML, CSS modular y JavaScript vanilla.
@@ -27,13 +27,13 @@ El proyecto combina un frontend ligero en HTML, CSS y JavaScript con una API en 
 ```text
 app/
   backend/
-    Bots/                 # Rutas y logica de decision del chat
+    Bots/                 # Rutas y lógica de decision del chat
     booking/              # Modelos, persistencia, horarios y rutas de reservas
-    core/                 # Creacion de la app, CORS, seguridad y arranque
+    core/                 # Creación de la app, CORS, seguridad y arranque
     services/             # Servicios de chat, reservas y restaurante
     config.py             # Carga de variables de entorno
-    csv_utils.py          # Registro de leads
-    email_utils.py        # Envio opcional de CSV por email
+    csv_útils.py          # Registro de leads
+    email_útils.py        # Envio opcional de CSV por email
     main.py               # Punto de entrada ASGI
   frontend/
     css/                  # Estilos por area de la interfaz
@@ -84,17 +84,17 @@ Copy-Item .env.example .env
 | `SENDGRID_TO` | Destinatario del CSV de leads | No |
 | `BOOKINGS_DB_PATH` | Ruta alternativa para la base de datos SQLite | No |
 
-Sin `GROQ_API_KEY`, el sistema sigue funcionando con deteccion local de intenciones para carta, fotos, FAQs, disponibilidad y reservas.
+Sin `GROQ_API_KEY`, el sistema sigue funcionando con detección local de intenciones para carta, fotos, FAQs, disponibilidad y reservas.
 
-## Ejecucion local
+## Ejecución local
 
-Desde la raiz del proyecto:
+Desde la raíz del proyecto:
 
 ```powershell
 uvicorn app.backend.main:app --reload
 ```
 
-Despues abre:
+Después abre:
 
 ```text
 http://127.0.0.1:8000
@@ -104,7 +104,7 @@ La API sirve el frontend desde `/` y los assets desde `/static`.
 
 ## Endpoints principales
 
-| Metodo | Ruta | Descripcion |
+| Método | Ruta | Descripción |
 | --- | --- | --- |
 | `POST` | `/chat` | Procesa mensajes del asistente |
 | `GET` | `/booking/availability` | Devuelve huecos disponibles |
@@ -124,12 +124,12 @@ Los tests crean bases de datos temporales dentro de `tests/.tmp/`, carpeta ignor
 
 ## Datos locales y seguridad
 
-Este repositorio esta preparado para no versionar secretos ni datos operativos:
+Este repositorio está preparado para no versionar secretos ni datos operativos:
 
 - `.env`, `.env.*` y `sendgrid.env` quedan fuera del control de versiones.
 - `leads.csv` queda fuera del control de versiones.
 - Bases de datos SQLite locales (`*.db`, `*.sqlite`, WAL/SHM) quedan fuera del control de versiones.
-- El entorno virtual (`venv/`) y caches de tests tambien estan ignorados.
+- El entorno virtual (`venv/`) y caches de tests también estan ignorados.
 
 Antes de publicar cambios, revisa siempre:
 
@@ -138,15 +138,15 @@ git status --short
 git diff --cached
 ```
 
-## Personalizacion
+## Personalización
 
-- Edita la informacion del restaurante en `app/backend/services/restaurant_catalog.py`.
+- Edita la información del restaurante en `app/backend/services/restaurant_catalog.py`.
 - Ajusta horarios, festivos, duracion de reservas y mesas en `app/backend/booking/scheduling.py`.
 - Modifica textos, estilos y componentes visuales en `app/frontend/`.
 
-## Notas de produccion
+## Notas de producción
 
 - Usa variables de entorno reales en el proveedor de despliegue, nunca en archivos versionados.
-- Configura CORS segun el dominio final si frontend y backend se despliegan por separado.
-- Sustituye SQLite por una base de datos gestionada si se espera concurrencia alta o multiples instancias.
-- Revisa limites de rate limiting segun trafico real.
+- Configura CORS según el dominio final si frontend y backend se despliegan por separado.
+- Sustituye SQLite por una base de datos gestiónada si se espera concurrencia alta o múltiples instancias.
+- Revisa límites de rate limiting según tráfico real.

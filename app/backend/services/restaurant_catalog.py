@@ -3,7 +3,7 @@ from __future__ import annotations
 
 RESTAURANT_INFO = {
     "name": "Mesa Viva",
-    "address": "Calle de Alcala 145, Madrid",
+    "address": "Calle de Alcalá 145, Madrid",
     "phone": "+34 910 123 456",
     "reservation_phone": "+34 910 123 456",
     "hours": {
@@ -14,7 +14,7 @@ RESTAURANT_INFO = {
         "lunes": "cerrado",
     },
     "cuisine_types": [
-        "cocina mediterranea",
+        "cocina mediterránea",
         "arroces",
         "tapas",
         "parrilla suave",
@@ -22,12 +22,12 @@ RESTAURANT_INFO = {
     "reservations": True,
     "terrace": True,
     "pets": "Solo en la terraza y con correa.",
-    "parking": "Hay un parking publico a 2 minutos andando.",
+    "parking": "Hay un parking público a 2 minutos andando.",
     "takeaway": True,
     "delivery": False,
     "payments": ["efectivo", "tarjeta", "Bizum"],
     "large_groups": "Aceptamos grupos de hasta 8 personas online. Para grupos mayores, mejor llamarnos.",
-    "allergens": "Podemos informar de alergenos plato por plato y adaptar varias opciones bajo consulta.",
+    "allergens": "Podemos informar de alérgenos plato por plato y adaptar varias opciones bajo consulta.",
 }
 
 
@@ -37,15 +37,15 @@ MENU_CATEGORIES = [
         "name": "Entrantes",
         "items": [
             {
-                "name": "Croquetas de jamon iberico",
+                "name": "Croquetas de jamón ibérico",
                 "description": "Crujientes por fuera y muy cremosas por dentro.",
                 "price": 8.5,
                 "available": True,
-                "allergens": ["gluten", "lacteos", "huevo"],
+                "allergens": ["gluten", "lácteos", "huevo"],
                 "vegetarian": False,
                 "vegan": False,
                 "gluten_free": False,
-                "tags": ["clasico", "rapido", "compartir", "carne"],
+                "tags": ["clásico", "rápido", "compartir", "carne"],
                 "featured": True,
             },
             {
@@ -53,7 +53,7 @@ MENU_CATEGORIES = [
                 "description": "Burrata cremosa con tomates confitados, albahaca y aceite de hierbas.",
                 "price": 11.5,
                 "available": True,
-                "allergens": ["lacteos"],
+                "allergens": ["lácteos"],
                 "vegetarian": True,
                 "vegan": False,
                 "gluten_free": True,
@@ -62,14 +62,14 @@ MENU_CATEGORIES = [
             },
             {
                 "name": "Pulpo a la brasa",
-                "description": "Pulpo con parmentier suave y pimenton ahumado.",
+                "description": "Pulpo con parmentier suave y pimentón ahumado.",
                 "price": 15.0,
                 "available": True,
                 "allergens": ["pescado"],
                 "vegetarian": False,
                 "vegan": False,
                 "gluten_free": True,
-                "tags": ["especialidad", "mar", "compartir", "tipico"],
+                "tags": ["especialidad", "mar", "compartir", "típico"],
                 "featured": True,
             },
         ],
@@ -83,11 +83,11 @@ MENU_CATEGORIES = [
                 "description": "Arroz cremoso con setas de temporada y parmesano.",
                 "price": 16.5,
                 "available": True,
-                "allergens": ["lacteos"],
+                "allergens": ["lácteos"],
                 "vegetarian": True,
                 "vegan": False,
                 "gluten_free": True,
-                "tags": ["vegetariano", "especialidad", "tipico"],
+                "tags": ["vegetariano", "especialidad", "típico"],
                 "featured": True,
             },
             {
@@ -104,7 +104,7 @@ MENU_CATEGORIES = [
             },
             {
                 "name": "Lubina al horno",
-                "description": "Lubina con verduras salteadas y salsa citrica.",
+                "description": "Lubina con verduras salteadas y salsa cítrica.",
                 "price": 18.0,
                 "available": True,
                 "allergens": ["pescado"],
@@ -115,15 +115,15 @@ MENU_CATEGORIES = [
                 "featured": True,
             },
             {
-                "name": "Secreto iberico",
-                "description": "Secreto iberico con patatas rusticas y jugo reducido.",
+                "name": "Secreto ibérico",
+                "description": "Secreto ibérico con patatas rústicas y jugo reducido.",
                 "price": 19.5,
                 "available": True,
                 "allergens": [],
                 "vegetarian": False,
                 "vegan": False,
                 "gluten_free": True,
-                "tags": ["carne", "especialidad", "tipico"],
+                "tags": ["carne", "especialidad", "típico"],
                 "featured": True,
             },
             {
@@ -131,11 +131,11 @@ MENU_CATEGORIES = [
                 "description": "Hamburguesa de vaca madurada con cheddar y cebolla caramelizada.",
                 "price": 14.0,
                 "available": True,
-                "allergens": ["gluten", "lacteos"],
+                "allergens": ["gluten", "lácteos"],
                 "vegetarian": False,
                 "vegan": False,
                 "gluten_free": False,
-                "tags": ["carne", "rapido", "barato"],
+                "tags": ["carne", "rápido", "barato"],
                 "featured": False,
             },
         ],
@@ -146,14 +146,14 @@ MENU_CATEGORIES = [
         "items": [
             {
                 "name": "Limonada casera",
-                "description": "Limon natural, hierbabuena y un toque de jengibre.",
+                "description": "Limón natural, hierbabuena y un toque de jengibre.",
                 "price": 3.0,
                 "available": True,
                 "allergens": [],
                 "vegetarian": True,
                 "vegan": True,
                 "gluten_free": True,
-                "tags": ["ligero", "rapido", "barato"],
+                "tags": ["ligero", "rápido", "barato"],
                 "featured": False,
             },
             {
@@ -170,7 +170,7 @@ MENU_CATEGORIES = [
             },
             {
                 "name": "Tinto de verano",
-                "description": "Clasico y fresco, ideal para compartir.",
+                "description": "Clásico y fresco, ideal para compartir.",
                 "price": 3.5,
                 "available": True,
                 "allergens": ["sulfitos"],
@@ -191,7 +191,7 @@ MENU_CATEGORIES = [
                 "description": "Cremosa, con base fina y coulis de frutos rojos.",
                 "price": 6.0,
                 "available": True,
-                "allergens": ["gluten", "lacteos", "huevo"],
+                "allergens": ["gluten", "lácteos", "huevo"],
                 "vegetarian": True,
                 "vegan": False,
                 "gluten_free": False,
@@ -203,16 +203,16 @@ MENU_CATEGORIES = [
                 "description": "Con nueces y helado de vainilla.",
                 "price": 5.5,
                 "available": True,
-                "allergens": ["gluten", "lacteos", "frutos secos", "huevo"],
+                "allergens": ["gluten", "lácteos", "frutos secos", "huevo"],
                 "vegetarian": True,
                 "vegan": False,
                 "gluten_free": False,
-                "tags": ["postre", "tipico"],
+                "tags": ["postre", "típico"],
                 "featured": False,
             },
             {
                 "name": "Fruta de temporada",
-                "description": "Corte fresco del dia.",
+                "description": "Corte fresco del día.",
                 "price": 4.5,
                 "available": True,
                 "allergens": [],
@@ -228,7 +228,7 @@ MENU_CATEGORIES = [
 
 
 MENU_OF_DAY = {
-    "name": "Menu del día",
+    "name": "Menú del día",
     "price": 16.9,
     "first_courses": [
         "Crema de calabaza con pipas tostadas",
@@ -243,7 +243,7 @@ MENU_OF_DAY = {
     "includes": [
         "Pan",
         "Bebida",
-        "Postre o cafe",
+        "Postre o café",
     ],
 }
 
@@ -251,7 +251,7 @@ MENU_OF_DAY = {
 PHOTO_COLLECTIONS = [
     {
         "name": "Platos destacados",
-        "description": "Una seleccion de nuestros platos mas pedidos.",
+        "description": "Una selección de nuestros platos más pedidos.",
         "tags": ["fotos", "platos", "destacados", "carta visual", "comida"],
         "photos": [
             "/static/pictures/restaurante/burrata.svg",
@@ -277,11 +277,11 @@ PHOTO_COLLECTIONS = [
         ],
     },
     {
-        "name": "Menu del dia",
-        "description": "Una referencia visual del menu del dia.",
-        "tags": ["menu del dia", "menu", "diario"],
+        "name": "Menú del día",
+        "description": "Una referencia visual del menú del día.",
+        "tags": ["menú del día", "menu", "diario"],
         "photos": [
-            "/static/pictures/restaurante/menu-dia.svg",
+            "/static/pictures/restaurante/menu-día.svg",
         ],
     },
 ]

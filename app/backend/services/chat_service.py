@@ -4,9 +4,9 @@ from app.backend.Bots.chat import ask_groq
 
 def fallback_chat_response():
     return (
-        "Puedo ayudarte con reservas, disponibilidad, carta, menu del día, fotos del local "
-        "y recomendaciones de platos. Por ejemplo: 'Quiero reservar para 4 manana a las 21:00', "
-        "'Ensename la carta' o 'Recomiendame algo vegetariano'."
+        "Puedo ayudarte con reservas, disponibilidad, carta, menú del día, fotos del local "
+        "y recomendaciones de platos. Por ejemplo: 'Quiero reservar para 4 mañana a las 21:00', "
+        "'Enséñame la carta' o 'Recomiéndame algo vegetariano'."
     )
 
 

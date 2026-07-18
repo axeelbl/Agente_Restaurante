@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     `Comensales: ${escapeHtml(data.party_size)}\n` +
                     `Fecha: ${escapeHtml(data.date)}\n` +
                     `Hora: ${escapeHtml(data.time)}${notesLine}\n` +
-                    `Confirmacion enviada a: ${escapeHtml(data.contact)}\n` +
+                    `Confirmación enviada a: ${escapeHtml(data.contact)}\n` +
                     `ID de reserva: ${escapeHtml(payload.booking_uuid)}`;
 
                 sendBotMessageSafe(message);
@@ -276,7 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            if (!confirm("Seguro que quieres cancelar la reserva?")) return;
+            if (!confirm("¿Seguro que quieres cancelar la reserva?")) return;
 
             try {
                 const res = await fetch("/booking/cancel", {

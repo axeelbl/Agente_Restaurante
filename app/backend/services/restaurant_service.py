@@ -114,7 +114,7 @@ def build_faq_response(topics: list[str]) -> dict:
 
     if "general" in topics:
         answers.append(
-            f"{RESTAURANT_INFO['name']} esta en {RESTAURANT_INFO['address']} y atendemos de martes a domingo."
+            f"{RESTAURANT_INFO['name']} está en {RESTAURANT_INFO['address']} y atendemos de martes a domingo."
         )
 
     for topic in topics:
@@ -128,17 +128,17 @@ def build_faq_response(topics: list[str]) -> dict:
         elif topic == "ubicacion":
             answers.append(f"Estamos en {RESTAURANT_INFO['address']}.")
         elif topic == "telefono":
-            answers.append(f"Nuestro telefono es {RESTAURANT_INFO['phone']}.")
+            answers.append(f"Nuestro teléfono es {RESTAURANT_INFO['phone']}.")
         elif topic == "reservas":
-            answers.append("Si, aceptamos reservas online y por telefono.")
+            answers.append("Sí, aceptamos reservas online y por teléfono.")
         elif topic == "terraza":
-            answers.append("Si, tenemos terraza.")
+            answers.append("Sí, tenemos terraza.")
         elif topic == "mascotas":
             answers.append(RESTAURANT_INFO["pets"])
         elif topic == "alergenos":
             answers.append(RESTAURANT_INFO["allergens"])
         elif topic == "vegetariano":
-            answers.append("Tenemos opciones vegetarianas y veganas en carta y menu del dia.")
+            answers.append("Tenemos opciones vegetarianas y veganas en carta y menú del día.")
         elif topic == "comida":
             answers.append(
                 "Trabajamos "
@@ -152,9 +152,9 @@ def build_faq_response(topics: list[str]) -> dict:
         elif topic == "parking":
             answers.append(RESTAURANT_INFO["parking"])
         elif topic == "takeaway":
-            answers.append("Si, preparamos comida para llevar.")
+            answers.append("Sí, preparamos comida para llevar.")
         elif topic == "delivery":
-            answers.append("No trabajamos con envio a domicilio por ahora.")
+            answers.append("No trabajamos con envío a domicilio por ahora.")
         elif topic == "grupos":
             answers.append(RESTAURANT_INFO["large_groups"])
 
@@ -188,7 +188,7 @@ def build_photo_response(message: str) -> dict:
     elif "terraza" in message or "interior" in message or "local" in message:
         collections = [collection for collection in PHOTO_COLLECTIONS if collection["name"] == "Local y terraza"]
     elif "menu del dia" in message:
-        collections = [collection for collection in PHOTO_COLLECTIONS if collection["name"] == "Menu del dia"]
+        collections = [collection for collection in PHOTO_COLLECTIONS if collection["name"] == "Menú del día"]
     elif "plato" in message or "comida" in message:
         collections = [collection for collection in PHOTO_COLLECTIONS if collection["name"] == "Platos destacados"]
 
@@ -257,7 +257,7 @@ def rank_menu_items(preferences: set[str]) -> list[dict]:
             continue
 
         score = 0
-        tags = set(item.get("tags", []))
+        tags = {normalize_text(tag) for tag in item.get("tags", [])}
         category_name = normalize_text(item["category"])
 
         if preferences and category_name == "bebidas":
@@ -350,7 +350,7 @@ def format_items(items: list[dict]) -> str:
 
         allergen_text = ""
         if item.get("allergens"):
-            allergen_text = " | Alergenos: " + ", ".join(item["allergens"])
+            allergen_text = " | Alérgenos: " + ", ".join(item["allergens"])
 
         marker_text = ""
         if markers:
