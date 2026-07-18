@@ -1,13 +1,12 @@
 import os
 import re
 
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
+import httpx
 from twilio.rest import Client
 
 
-SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
-FROM_EMAIL = os.getenv("SENDGRID_FROM")
+RESEND_API_KEY = os.getenv("RESEND_API_KEY")
+FROM_EMAIL = os.getenv("RESEND_FROM") or os.getenv("SENDGRID_FROM")
 
 TWILIO_SID = os.getenv("TWILIO_SID")
 TWILIO_TOKEN = os.getenv("TWILIO_TOKEN")
@@ -75,14 +74,24 @@ def send_booking_email(
         {uuid_text}
         """
 
-    message = Mail(
-        from_email=FROM_EMAIL,
-        to_emails=to_email,
-        subject=subject,
-        html_content=html_content,
+    if not RESEND_API_KEY or not FROM_EMAIL:
+        print("Falta configuracion de Resend, no se envia email de reserva")
+        return
+
+    response = httpx.post(
+        "https://api.resend.com/emails",
+        headers={"Authorization": f"Bearer {RESEND_API_KEY}"},
+        json={
+            "from": FROM_EMAIL,
+            "to": [to_email],
+            "subject": subject,
+            "html": html_content,
+        },
+        timeout=30,
     )
-    sg = SendGridAPIClient(SENDGRID_API_KEY)
-    sg.send(message)
+    if response.is_error:
+        print("Error de Resend:", response.status_code, response.text)
+        response.raise_for_status()
 
 
 def send_booking_sms(

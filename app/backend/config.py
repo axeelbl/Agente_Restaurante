@@ -13,4 +13,7 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 SENDGRID_FROM = os.getenv("SENDGRID_FROM")
 SENDGRID_TO = os.getenv("SENDGRID_TO")
+RESEND_API_KEY = os.getenv("RESEND_API_KEY")
+RESEND_FROM = os.getenv("RESEND_FROM") or os.getenv("SENDGRID_FROM")
+RESEND_TO = os.getenv("RESEND_TO") or os.getenv("SENDGRID_TO")
 LEADS_FILE = "leads.csv"
