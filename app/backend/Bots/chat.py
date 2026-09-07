@@ -9,6 +9,7 @@ from app.backend.services.restaurant_service import normalize_text
 
 
 client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
+MODEL = "llama-3.3-70b-versatile"
 
 
 def ask_groq(messages, temperature=0.9):
@@ -16,7 +17,7 @@ def ask_groq(messages, temperature=0.9):
         raise RuntimeError("Groq no configurado")
 
     response = client.chat.completions.create(
-        model="llama-3.1-8b-instant",
+        model=MODEL,
         messages=messages,
         temperature=temperature,
     )
@@ -188,14 +189,17 @@ def decide_and_extract_booking(user_message):
     if local_response["action"] != "CHAT" or client is None:
         return local_response
 
-    response = client.chat.completions.create(
-        model="llama-3.1-8b-instant",
-        messages=[
-            {"role": "system", "content": BOOKING_DECISION_PROMPT},
-            {"role": "user", "content": user_message},
-        ],
-        temperature=0,
-    )
+    try:
+        response = client.chat.completions.create(
+            model=MODEL,
+            messages=[
+                {"role": "system", "content": BOOKING_DECISION_PROMPT},
+                {"role": "user", "content": user_message},
+            ],
+            temperature=0,
+        )
+    except Exception:
+        return local_response
 
     content = response.choices[0].message.content
 

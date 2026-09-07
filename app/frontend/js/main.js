@@ -1,6 +1,6 @@
 import { AvatarController } from "./avatar.js?v=20260720-assets";
 import { ChatUI } from "./ui.js";
-import { ChatController } from "./chat.js";
+import { ChatController } from "./chat.js?v=20260907-agent-routes";
 
 function bindQuickActions(chat, ui) {
     document.querySelectorAll("[data-prompt]").forEach(button => {
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("clearBtn")
     );
 
-    const chat = new ChatController(ui, avatar, "/chat");
+    const chat = new ChatController(ui, avatar, "/agents/restaurante/chat");
 
     window.chatUI = ui;
     window.chatController = chat;
