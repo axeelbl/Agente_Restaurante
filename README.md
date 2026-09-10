@@ -1,152 +1,78 @@
-# Mesa Viva - Asistente inteligente de restaurante
+# Mesa Viva — asistente de restaurante
 
-Mesa Viva es una aplicación web para restaurantes que centraliza en un chat la información clave del local: carta, menú del día, recomendaciones, fotos, dudas frecuentes y gestión de reservas.
+Aplicación web de demostración para consultar la carta de un restaurante, recibir recomendaciones y gestionar reservas. Combina un frontend sin framework con una API FastAPI, persistencia SQLite y respuestas locales que pueden ampliarse opcionalmente con Groq.
 
-El proyecto combina un frontend ligero en HTML, CSS y JavaScript con una API en FastAPI. El asistente puede resolver consultas de forma local con reglas del dominio y, cuando está configurado, apoyarse en Groq para conversaciones más abiertas.
+## Funciones
 
-## Funcionalidades principales
-
-- Chat conversaciónal para carta, recomendaciones, fotos e información del restaurante.
-- Reserva online con validación de fecha, hora, contacto y número de comensales.
-- Consulta de disponibilidad por día, hora y tamaño del grupo.
-- Modificación y cancelación de reservas medíante ID y contacto asociado.
-- Catálogo editable de platos, precios, alérgenos, etiquetas y fotos.
-- Registro local de leads en CSV y envío opcional por SendGrid.
-- Protecciones básicas: rate limiting, cabeceras de seguridad, validación de inputs y exclusion de secretos del repositorio.
-
-## Stack técnico
-
-- Backend: FastAPI, Pydantic, SQLite, SlowAPI.
-- Frontend: HTML, CSS modular y JavaScript vanilla.
-- IA opcional: Groq (`llama-3.1-8b-instant`).
-- Email opcional: SendGrid.
-- Tests: `unittest`.
-
-## Estructura del proyecto
-
-```text
-app/
-  backend/
-    Bots/                 # Rutas y lógica de decision del chat
-    booking/              # Modelos, persistencia, horarios y rutas de reservas
-    core/                 # Creación de la app, CORS, seguridad y arranque
-    services/             # Servicios de chat, reservas y restaurante
-    config.py             # Carga de variables de entorno
-    csv_útils.py          # Registro de leads
-    email_útils.py        # Envio opcional de CSV por email
-    main.py               # Punto de entrada ASGI
-  frontend/
-    css/                  # Estilos por area de la interfaz
-    js/                   # Controladores de chat, UI, avatar y reservas
-    pictures/             # Imagenes e iconos del restaurante
-    index.html            # Interfaz principal
-tests/                    # Pruebas de servicios de reservas y restaurante
-requirements.txt          # Dependencias Python
-```
+- Carta, menú del día, alérgenos, recomendaciones y galería de fotos.
+- Disponibilidad de mesas y creación, modificación o cancelación de reservas.
+- Notificaciones opcionales por Resend (email) o Twilio (SMS).
+- Registro de conversaciones opcional y desactivado por defecto.
+- Rate limiting, CORS configurable, cabeceras de seguridad y validación de entradas.
+- Healthcheck en `GET /health`.
 
 ## Requisitos
 
-- Python 3.11 o superior recomendado.
-- `pip`.
-- Cuenta/API key de Groq solo si se quiere activar la respuesta generativa.
-- Cuenta/API key de SendGrid solo si se quiere enviar el CSV de leads por email.
+- Python 3.11 o posterior.
+- Node.js solo para comprobar la sintaxis del frontend.
 
-## Instalacion
+## Instalación
 
-1. Crear y activar un entorno virtual:
-
-```powershell
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-```
-
-2. Instalar dependencias:
-
-```powershell
-pip install -r requirements.txt
-```
-
-3. Crear el archivo de entorno:
-
-```powershell
-Copy-Item .env.example .env
-```
-
-4. Rellenar solo las variables que se vayan a usar. No subas `.env` al repositorio.
-
-## Variables de entorno
-
-| Variable | Uso | Obligatoria |
-| --- | --- | --- |
-| `GROQ_API_KEY` | Activa respuestas generativas con Groq | No |
-| `SENDGRID_API_KEY` | Permite enviar el CSV de leads por email | No |
-| `SENDGRID_FROM` | Remitente validado en SendGrid | No |
-| `SENDGRID_TO` | Destinatario del CSV de leads | No |
-| `BOOKINGS_DB_PATH` | Ruta alternativa para la base de datos SQLite | No |
-
-Sin `GROQ_API_KEY`, el sistema sigue funcionando con detección local de intenciones para carta, fotos, FAQs, disponibilidad y reservas.
-
-## Ejecución local
-
-Desde la raíz del proyecto:
-
-```powershell
+```bash
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+cp .env.example .env
 uvicorn app.backend.main:app --reload
 ```
 
-Después abre:
+En PowerShell, activa el entorno con `.\.venv\Scripts\Activate.ps1` y copia el ejemplo con `Copy-Item .env.example .env`.
+
+Abre <http://127.0.0.1:8000>. Los recursos y las llamadas API usan rutas relativas, por lo que la misma aplicación puede publicarse detrás de un subpath de proxy inverso.
+
+## Configuración
+
+| Variable | Uso | Valor predeterminado |
+| --- | --- | --- |
+| `GROQ_API_KEY` | Activa respuestas generativas | Sin IA externa |
+| `RESEND_API_KEY`, `RESEND_FROM` | Notificaciones de reservas por email | Desactivadas |
+| `RESEND_TO` | Destino del CSV de conversaciones | Desactivado |
+| `TWILIO_SID`, `TWILIO_TOKEN`, `TWILIO_PHONE` | Notificaciones por SMS | Desactivadas |
+| `BOOKINGS_DB_PATH` | Ruta de SQLite | `app/backend/booking/bookings.db` |
+| `LEADS_FILE` | Ruta del CSV opcional | `leads.csv` en la raíz |
+| `LEAD_LOGGING_ENABLED` | Guarda mensajes y envía el CSV si Resend está configurado | `false` |
+| `CORS_ORIGINS` | Orígenes permitidos, separados por comas | localhost sin puerto |
+
+No uses credenciales reales en archivos versionados. Si activas el registro de conversaciones, informa a los usuarios, define una retención y protege el CSV: puede contener datos personales introducidos en el chat. La aplicación no guarda IP, user-agent ni referer en ese registro.
+
+## Desarrollo y verificación
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m compileall -q app tests
+python -m pytest -q
+find app/frontend/js -name '*.js' -print0 | xargs -0 -n1 node --check
+git diff --check
+pip-audit -r requirements.txt
+pip-audit
+```
+
+GitHub Actions ejecuta estas comprobaciones en cada push a `main` y en cada pull request.
+
+## Estructura
 
 ```text
-http://127.0.0.1:8000
+app/backend/Bots/       # clasificación de intenciones y cliente opcional de Groq
+app/backend/booking/    # modelos, agenda, SQLite y notificaciones
+app/backend/core/       # aplicación, CORS, seguridad y arranque
+app/backend/services/   # lógica de reservas, chat y catálogo
+app/frontend/           # HTML, CSS, JavaScript y medios
+tests/                  # pruebas de servicio, API y seguridad
 ```
 
-La API sirve el frontend desde `/` y los assets desde `/static`.
+El catálogo y las rutas de las imágenes se mantienen en `app/backend/services/restaurant_catalog.py`; los horarios y mesas, en `app/backend/booking/scheduling.py`.
 
-## Endpoints principales
+## Límites de producción
 
-| Método | Ruta | Descripción |
-| --- | --- | --- |
-| `POST` | `/chat` | Procesa mensajes del asistente |
-| `GET` | `/booking/availability` | Devuelve huecos disponibles |
-| `POST` | `/booking/reserve` | Crea una reserva |
-| `POST` | `/booking/modify` | Modifica una reserva existente |
-| `POST` | `/booking/cancel` | Cancela una reserva existente |
-
-## Tests
-
-Ejecutar la suite:
-
-```powershell
-python -m unittest discover -s tests
-```
-
-Los tests crean bases de datos temporales dentro de `tests/.tmp/`, carpeta ignorada por Git.
-
-## Datos locales y seguridad
-
-Este repositorio está preparado para no versionar secretos ni datos operativos:
-
-- `.env`, `.env.*` y `sendgrid.env` quedan fuera del control de versiones.
-- `leads.csv` queda fuera del control de versiones.
-- Bases de datos SQLite locales (`*.db`, `*.sqlite`, WAL/SHM) quedan fuera del control de versiones.
-- El entorno virtual (`venv/`) y caches de tests también estan ignorados.
-
-Antes de publicar cambios, revisa siempre:
-
-```powershell
-git status --short
-git diff --cached
-```
-
-## Personalización
-
-- Edita la información del restaurante en `app/backend/services/restaurant_catalog.py`.
-- Ajusta horarios, festivos, duracion de reservas y mesas en `app/backend/booking/scheduling.py`.
-- Modifica textos, estilos y componentes visuales en `app/frontend/`.
-
-## Notas de producción
-
-- Usa variables de entorno reales en el proveedor de despliegue, nunca en archivos versionados.
-- Configura CORS según el dominio final si frontend y backend se despliegan por separado.
-- Sustituye SQLite por una base de datos gestiónada si se espera concurrencia alta o múltiples instancias.
-- Revisa límites de rate limiting según tráfico real.
+SQLite y el rate limiter en memoria son adecuados para una única instancia y tráfico moderado. Para varias réplicas o concurrencia alta, usa una base de datos y un backend de rate limiting compartidos. Configura `CORS_ORIGINS` con los dominios HTTPS reales y gestiona secretos desde el proveedor de despliegue.

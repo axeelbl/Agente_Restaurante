@@ -1,4 +1,4 @@
-import random
+import secrets
 import string
 
 from .database import BOOKINGS_TABLE, get_connection
@@ -6,7 +6,7 @@ from .database import BOOKINGS_TABLE, get_connection
 
 def generate_public_id(length=8):
     chars = string.ascii_uppercase + string.digits
-    return "".join(random.choices(chars, k=length))
+    return "".join(secrets.choice(chars) for _ in range(length))
 
 
 def get_bookings_for_date(date: str) -> list[dict]:

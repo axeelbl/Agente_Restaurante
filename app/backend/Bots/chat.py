@@ -204,9 +204,25 @@ def decide_and_extract_booking(user_message):
     content = response.choices[0].message.content
 
     try:
-        return json.loads(content)
+        parsed = json.loads(content)
     except json.JSONDecodeError:
         return local_response
+
+    if not isinstance(parsed, dict) or not isinstance(parsed.get("booking", {}), dict):
+        return local_response
+    if parsed.get("action") not in {
+        "CHAT",
+        "RESERVAR",
+        "CHECK_AVAILABILITY",
+        "MODIFY_BOOKING",
+        "CANCEL_BOOKING",
+        "SHOW_PHOTOS",
+        "SHOW_MENU",
+        "RECOMMEND_DISH",
+        "SHOW_FAQ",
+    }:
+        return local_response
+    return parsed
 
 
 REQUIRED_FIELDS = ["name", "date", "time", "party_size", "contact"]

@@ -1,7 +1,6 @@
 from fastapi import APIRouter, BackgroundTasks, HTTPException, Request
 
-from .models import BookingRequest
-from .repository import get_booking_by_uuid
+from .models import BookingCancelRequest, BookingModifyRequest, BookingRequest
 from .scheduling import get_available_slots, is_closed_day, parse_date, parse_party_size
 from app.backend.core.security import limiter
 from app.backend.services.booking_service import (
@@ -40,20 +39,21 @@ def reserve(request: Request, booking: BookingRequest, background_tasks: Backgro
 
 @router.post("/modify")
 @limiter.limit("10/minute")
-def modify_booking(request: Request, decision: dict, background_tasks: BackgroundTasks):
-    booking_uuid = decision.get("booking_uuid")
-    if booking_uuid and not get_booking_by_uuid(booking_uuid):
-        raise HTTPException(status_code=404, detail="Reserva no encontrada")
-
+def modify_booking(
+    request: Request,
+    decision: BookingModifyRequest,
+    background_tasks: BackgroundTasks,
+):
+    data = decision.model_dump(mode="json")
     response = handle_modify_booking(
         {
             "booking": {
-                "booking_uuid": decision.get("booking_uuid"),
-                "contact": decision.get("contact"),
-                "date": decision.get("new_date"),
-                "time": decision.get("new_time"),
-                "party_size": decision.get("new_party_size"),
-                "notes": decision.get("new_notes"),
+                "booking_uuid": data["booking_uuid"],
+                "contact": data["contact"],
+                "date": data["new_date"],
+                "time": data["new_time"],
+                "party_size": data["new_party_size"],
+                "notes": data["new_notes"],
             }
         },
         background_tasks,
@@ -61,23 +61,18 @@ def modify_booking(request: Request, decision: dict, background_tasks: Backgroun
 
     if response["bot_message"].startswith("Perfecto"):
         return {"status": "ok", "message": response["bot_message"]}
-
     raise HTTPException(status_code=400, detail=response["bot_message"])
 
 
 @router.post("/cancel")
 @limiter.limit("5/minute")
-def cancel_booking(request: Request, decision: dict, background_tasks: BackgroundTasks):
-    booking_uuid = decision.get("booking_uuid")
-    if booking_uuid and not get_booking_by_uuid(booking_uuid):
-        raise HTTPException(status_code=404, detail="Reserva no encontrada")
-
-    response = handle_cancel_booking(
-        {"booking": {"booking_uuid": decision.get("booking_uuid"), "contact": decision.get("contact")}},
-        background_tasks,
-    )
-
+def cancel_booking(
+    request: Request,
+    decision: BookingCancelRequest,
+    background_tasks: BackgroundTasks,
+):
+    data = decision.model_dump(mode="json")
+    response = handle_cancel_booking({"booking": data}, background_tasks)
     if "ha sido cancelada correctamente" in response["bot_message"]:
         return {"status": "ok", "message": response["bot_message"]}
-
     raise HTTPException(status_code=400, detail=response["bot_message"])

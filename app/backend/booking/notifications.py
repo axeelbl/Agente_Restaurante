@@ -1,13 +1,13 @@
 import os
 import re
+from html import escape
 
 import httpx
 from twilio.rest import Client
 
 
 RESEND_API_KEY = os.getenv("RESEND_API_KEY")
-FROM_EMAIL = os.getenv("RESEND_FROM") or os.getenv("SENDGRID_FROM")
-
+FROM_EMAIL = os.getenv("RESEND_FROM")
 TWILIO_SID = os.getenv("TWILIO_SID")
 TWILIO_TOKEN = os.getenv("TWILIO_TOKEN")
 TWILIO_PHONE = os.getenv("TWILIO_PHONE")
@@ -35,8 +35,6 @@ def send_booking_notification(
         send_booking_email(contact, name, party_size, date, time, booking_uuid, cancelled, notes)
     elif is_phone(contact):
         send_booking_sms(contact, name, party_size, date, time, booking_uuid, cancelled, notes)
-    else:
-        print("Contacto no válido:", contact)
 
 
 def send_booking_email(
@@ -49,34 +47,38 @@ def send_booking_email(
     cancelled=False,
     notes="",
 ):
-    uuid_text = f"<p><b>ID de reserva:</b> {booking_uuid}</p>" if booking_uuid else ""
-    notes_text = f"<p><b>Observaciones:</b> {notes}</p>" if notes else ""
+    if not RESEND_API_KEY or not FROM_EMAIL:
+        return
+
+    safe_name = escape(str(name))
+    safe_date = escape(str(date))
+    safe_time = escape(str(time))
+    safe_uuid = escape(str(booking_uuid)) if booking_uuid else ""
+    safe_notes = escape(str(notes)) if notes else ""
+    uuid_text = f"<p><b>ID de reserva:</b> {safe_uuid}</p>" if safe_uuid else ""
+    notes_text = f"<p><b>Observaciones:</b> {safe_notes}</p>" if safe_notes else ""
 
     if cancelled:
         subject = "Reserva cancelada"
         html_content = f"""
-        <h2>Hola {name}</h2>
-        <p>Tu reserva para <b>{party_size} personas</b> del {date} a las {time} ha sido cancelada.</p>
+        <h2>Hola {safe_name}</h2>
+        <p>Tu reserva para <b>{party_size} personas</b> del {safe_date} a las {safe_time} ha sido cancelada.</p>
         {notes_text}
         {uuid_text}
         """
     else:
         subject = "Reserva confirmada"
         html_content = f"""
-        <h2>Hola {name}</h2>
-        <p>Tu reserva esta confirmada:</p>
+        <h2>Hola {safe_name}</h2>
+        <p>Tu reserva está confirmada:</p>
         <ul>
             <li><b>Comensales:</b> {party_size}</li>
-            <li><b>Fecha:</b> {date}</li>
-            <li><b>Hora:</b> {time}</li>
+            <li><b>Fecha:</b> {safe_date}</li>
+            <li><b>Hora:</b> {safe_time}</li>
         </ul>
         {notes_text}
         {uuid_text}
         """
-
-    if not RESEND_API_KEY or not FROM_EMAIL:
-        print("Falta configuracion de Resend, no se envia email de reserva")
-        return
 
     response = httpx.post(
         "https://api.resend.com/emails",
@@ -89,9 +91,7 @@ def send_booking_email(
         },
         timeout=30,
     )
-    if response.is_error:
-        print("Error de Resend:", response.status_code, response.text)
-        response.raise_for_status()
+    response.raise_for_status()
 
 
 def send_booking_sms(
@@ -104,6 +104,9 @@ def send_booking_sms(
     cancelled=False,
     notes="",
 ):
+    if not TWILIO_SID or not TWILIO_TOKEN or not TWILIO_PHONE:
+        return
+
     uuid_text = f" ID de reserva: {booking_uuid}" if booking_uuid else ""
     notes_text = f" Observaciones: {notes}." if notes else ""
 
@@ -119,8 +122,4 @@ def send_booking_sms(
         )
 
     client = Client(TWILIO_SID, TWILIO_TOKEN)
-    client.messages.create(
-        body=body,
-        from_=TWILIO_PHONE,
-        to=phone,
-    )
+    client.messages.create(body=body, from_=TWILIO_PHONE, to=phone)

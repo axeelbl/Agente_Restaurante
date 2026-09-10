@@ -26,6 +26,7 @@ leads.csv
 
 # Test and cache artifacts
 .pytest_cache/
+.venv-audit/
 .coverage
 .coverage.*
 htmlcov/

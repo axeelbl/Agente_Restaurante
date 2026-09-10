@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install development environment
+        run: python -m pip install --requirement requirements-dev.txt
+      - name: Compile Python
+        run: python -m compileall -q app tests
+      - name: Test
+        env:
+          BOOKINGS_DB_PATH: /tmp/mesa-viva-ci.db
+        run: python -m pytest -q
+      - name: Check JavaScript syntax
+        run: find app/frontend/js -name '*.js' -print0 | xargs -0 -n1 node --check
+      - name: Audit production dependencies
+        run: pip-audit --requirement requirements.txt
+      - name: Audit complete development environment
+        run: pip-audit

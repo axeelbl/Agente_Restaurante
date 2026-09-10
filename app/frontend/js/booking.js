@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            const res = await fetch(`/agents/restaurante/booking/availability?${params.toString()}`, { cache: "no-store" });
+            const res = await fetch(`booking/availability?${params.toString()}`, { cache: "no-store" });
             const hours = await res.json();
 
             selectElement.innerHTML = "";
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = Object.fromEntries(new FormData(bookingForm));
 
             try {
-                const res = await fetch("/agents/restaurante/booking/reserve", {
+                const res = await fetch("booking/reserve", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data),
@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             try {
-                const res = await fetch("/agents/restaurante/booking/modify", {
+                const res = await fetch("booking/modify", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data),
@@ -279,7 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!confirm("¿Seguro que quieres cancelar la reserva?")) return;
 
             try {
-                const res = await fetch("/agents/restaurante/booking/cancel", {
+                const res = await fetch("booking/cancel", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ booking_uuid, contact }),

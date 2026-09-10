@@ -16,9 +16,9 @@ export class AvatarController {
     startBlinking() {
         setInterval(() => {
             if (this.talkingInterval) return;
-            this.baseFace.src = "/agents/restaurante/pictures/eyes_closed_mouth_closed.png";
+            this.baseFace.src = "pictures/eyes_closed_mouth_closed.png";
             setTimeout(() => {
-                this.baseFace.src = "/agents/restaurante/pictures/eyes_open_mouth_closed.png";
+                this.baseFace.src = "pictures/eyes_open_mouth_closed.png";
             }, 200);
         }, 4000);
     }

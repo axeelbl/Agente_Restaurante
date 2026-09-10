@@ -254,9 +254,9 @@ PHOTO_COLLECTIONS = [
         "description": "Una selección de nuestros platos más pedidos.",
         "tags": ["fotos", "platos", "destacados", "carta visual", "comida"],
         "photos": [
-            "/agents/restaurante/pictures/restaurante/burrata.svg",
-            "/agents/restaurante/pictures/restaurante/arroz.svg",
-            "/agents/restaurante/pictures/restaurante/secreto.svg",
+            "pictures/restaurante/burrata.svg",
+            "pictures/restaurante/arroz.svg",
+            "pictures/restaurante/secreto.svg",
         ],
     },
     {
@@ -264,8 +264,8 @@ PHOTO_COLLECTIONS = [
         "description": "Vista del comedor interior y de la terraza.",
         "tags": ["local", "terraza", "interior", "restaurante", "sitio"],
         "photos": [
-            "/agents/restaurante/pictures/restaurante/sala.svg",
-            "/agents/restaurante/pictures/restaurante/terraza.svg",
+            "pictures/restaurante/sala.svg",
+            "pictures/restaurante/terraza.svg",
         ],
     },
     {
@@ -273,7 +273,7 @@ PHOTO_COLLECTIONS = [
         "description": "Nuestras opciones dulces del final.",
         "tags": ["postres", "dulces"],
         "photos": [
-            "/agents/restaurante/pictures/restaurante/postres.svg",
+            "pictures/restaurante/postres.svg",
         ],
     },
     {
@@ -281,7 +281,7 @@ PHOTO_COLLECTIONS = [
         "description": "Una referencia visual del menú del día.",
         "tags": ["menú del día", "menu", "diario"],
         "photos": [
-            "/agents/restaurante/pictures/restaurante/menu-dia.svg",
+            "pictures/restaurante/menu-dia.svg",
         ],
     },
 ]

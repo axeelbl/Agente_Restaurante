@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("clearBtn")
     );
 
-    const chat = new ChatController(ui, avatar, "/agents/restaurante/chat");
+    const chat = new ChatController(ui, avatar, "chat");
 
     window.chatUI = ui;
     window.chatController = chat;

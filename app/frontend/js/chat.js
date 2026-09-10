@@ -113,6 +113,9 @@ export class ChatController {
             });
 
             const data = await response.json();
+            if (!response.ok) {
+                throw new Error("El servidor ha rechazado el mensaje.");
+            }
             this.ui.hideTypingIndicator();
             await this.ui.addBotMessageTyping(data.bot_message);
 

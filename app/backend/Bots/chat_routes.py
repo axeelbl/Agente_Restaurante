@@ -1,9 +1,10 @@
 import time
 
 from fastapi import APIRouter, BackgroundTasks, Request
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from app.backend.Bots.chat import decide_and_extract_booking
+from app.backend.config import LEAD_LOGGING_ENABLED
 from app.backend.core.security import limiter
 from app.backend.csv_utils import save_lead
 from app.backend.email_utils import send_csv_email
@@ -22,43 +23,44 @@ router = APIRouter()
 
 
 class MessageRequest(BaseModel):
-    user_message: str
+    user_message: str = Field(min_length=1, max_length=500)
+
+
+def record_lead(user_message: str, bot_reply: str, response_time: float) -> None:
+    if not LEAD_LOGGING_ENABLED:
+        return
+
+    save_lead(
+        user_message,
+        bot_reply,
+        {
+            "ip": "",
+            "user_agent": "",
+            "language": "",
+            "referer": "",
+            "response_time": response_time,
+        },
+    )
+    send_csv_email()
 
 
 @router.post("/chat")
 @limiter.limit("20/minute")
-async def chat_endpoint(
+def chat_endpoint(
     msg: MessageRequest,
     request: Request,
     background_tasks: BackgroundTasks,
 ):
-    user_message = msg.user_message
-    if len(user_message) > 500:
-        return {"bot_message": "Mensaje demasiado largo."}
+    user_message = msg.user_message.strip()
+    if not user_message:
+        return {"bot_message": "Escribe un mensaje para continuar."}
 
+    start_time = time.monotonic()
     decision = decide_and_extract_booking(user_message)
-    start_time = time.time()
-
-    def record_lead(bot_reply: str):
-        meta = {
-            "ip": request.client.host,
-            "user_agent": request.headers.get("user-agent", ""),
-            "language": request.headers.get("accept-language", ""),
-            "referer": request.headers.get("referer", ""),
-            "response_time": round(time.time() - start_time, 2),
-        }
-        save_lead(user_message, bot_reply, meta)
-        try:
-            send_csv_email()
-        except Exception as exc:
-            print("Error enviando CSV:", exc)
 
     if decision.get("action") == "RESERVAR":
         response = handle_booking(decision, background_tasks)
-        record_lead(response["bot_message"])
-        return response
-
-    if decision.get("action") == "CHECK_AVAILABILITY":
+    elif decision.get("action") == "CHECK_AVAILABILITY":
         booking_data = decision.get("booking", {})
         if decision.get("availability_date") or booking_data.get("date"):
             response = handle_availability(decision)
@@ -69,24 +71,16 @@ async def chat_endpoint(
             except (TypeError, ValueError):
                 party_size = 2
             response = handle_availability_overview(party_size=party_size)
-        record_lead(response["bot_message"])
-        return response
-
-    if decision.get("action") == "MODIFY_BOOKING":
+    elif decision.get("action") == "MODIFY_BOOKING":
         response = handle_modify_booking(decision, background_tasks)
-        record_lead(response["bot_message"])
-        return response
-
-    if decision.get("action") == "CANCEL_BOOKING":
+    elif decision.get("action") == "CANCEL_BOOKING":
         response = handle_cancel_booking(decision, background_tasks)
-        record_lead(response["bot_message"])
-        return response
+    else:
+        response = handle_restaurant_request(user_message, decision.get("action"))
+        if response is None:
+            response = handle_chat(user_message, request)
 
-    restaurant_response = handle_restaurant_request(user_message, decision.get("action"))
-    if restaurant_response:
-        record_lead(restaurant_response["bot_message"])
-        return restaurant_response
-
-    response = handle_chat(user_message, request)
-    record_lead(response["bot_message"])
+    if LEAD_LOGGING_ENABLED:
+        elapsed = round(time.monotonic() - start_time, 2)
+        background_tasks.add_task(record_lead, user_message, response["bot_message"], elapsed)
     return response
